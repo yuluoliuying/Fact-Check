@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:contxt="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <contxt:component-scan base-package="com.ssm.factcheck_ssm.service" />
+
+    <!--创建数据源-->
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <!-- 数据库驱动 -->
+        <property name="driverClass" value="org.mysql.jdbc.Driver" />
+        <!-- 数据库连接 -->
+        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/data" />
+        <!-- 数据库用户名 -->
+        <property name="user" value="root"/>
+        <!-- 数据库密码 -->
+        <property name="password" value="123456"/>
+    </bean>
+
+    <!-- 配置mybatis  -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!-- 数据源的实例化 -->
+        <property name="dataSource" ref="dataSource"/>
+        <!-- 映射 DML 语法 -->
+        <property name="mapperLocations" value="classpath:mapper/*.xml"/>
+    </bean>
+    <!-- 映射 数据访问层 ( dao ) 中的接口 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+        <property name="basePackage" value="com.ssm.factcheck_ssm.dao"/>
+    </bean>
+
+</beans>
