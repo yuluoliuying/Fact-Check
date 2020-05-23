@@ -25,7 +25,7 @@ values ('zzytql', '123456'),
 create table `role`
 (
     rid      integer auto_increment,
-    roleName varchar(100) not null,
+    role_name varchar(100) not null,
     uid      integer      not null,
     primary key (rid),
     foreign key (uid) references `user` (uid) on delete cascade
@@ -34,7 +34,7 @@ create table `role`
 create table `tag`
 (
     tid     integer auto_increment,
-    tagName varchar(100) unique not null,
+    tag_name varchar(100) unique not null,
     primary key (tid)
 );
 
@@ -50,11 +50,11 @@ create table `user_tag`
 create table `message`
 (
     mid         integer auto_increment,
-    messageName varchar(100) not null,
+    message_name varchar(100) not null,
     description mediumtext   not null,
     position    varchar(100) null,
-    tagName     varchar(100) null,
-    uploadTime  timestamp    not null,
+    tag_name     varchar(100) null,
+    upload_time  timestamp    not null,
     primary key (mid)
 );
 
@@ -69,13 +69,13 @@ create table `message_state`
 
 create table `message_process`
 (
-    processNum integer auto_increment,
+    process_num integer auto_increment,
     mid        integer      not null,
     type       integer      not null,
     state      integer      not null,
     username   varchar(100) not null,
     content    text,
-    primary key (processNum),
+    primary key (process_num),
     foreign key (mid) references `message` (mid) on delete cascade,
     foreign key (username) references `user` (username) on delete cascade
 );
@@ -85,7 +85,7 @@ create table `message_log`
     lid        integer auto_increment,
     username   varchar(100) not null,
     content    text         not null,
-    uploadTime timestamp    not null,
+    upload_time timestamp    not null,
     primary key (lid),
     foreign key (username) references `user` (username) on delete cascade
 );
@@ -94,11 +94,11 @@ create table `result`
 (
     rid         integer auto_increment,
     state       integer      not null,
-    resultName  varchar(100) not null,
+    result_name  varchar(100) not null,
     description mediumtext   not null,
     position    varchar(100) null,
-    tagName     varchar(100) not null,
-    updateTime  timestamp    not null,
-    releaseTime timestamp    not null,
+    tag_name     varchar(100) not null,
+    update_time  timestamp    not null,
+    release_time timestamp    not null,
     primary key (rid)
 )
