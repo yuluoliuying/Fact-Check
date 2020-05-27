@@ -295,6 +295,76 @@ public class ResultExample {
             return (Criteria) this;
         }
 
+        public Criteria andCoverIsNull() {
+            addCriterion("cover is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoverIsNotNull() {
+            addCriterion("cover is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoverEqualTo(String value) {
+            addCriterion("cover =", value, "cover");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoverNotEqualTo(String value) {
+            addCriterion("cover <>", value, "cover");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoverGreaterThan(String value) {
+            addCriterion("cover >", value, "cover");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoverGreaterThanOrEqualTo(String value) {
+            addCriterion("cover >=", value, "cover");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoverLessThan(String value) {
+            addCriterion("cover <", value, "cover");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoverLessThanOrEqualTo(String value) {
+            addCriterion("cover <=", value, "cover");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoverLike(String value) {
+            addCriterion("cover like", value, "cover");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoverNotLike(String value) {
+            addCriterion("cover not like", value, "cover");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoverIn(List<String> values) {
+            addCriterion("cover in", values, "cover");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoverNotIn(List<String> values) {
+            addCriterion("cover not in", values, "cover");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoverBetween(String value1, String value2) {
+            addCriterion("cover between", value1, value2, "cover");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoverNotBetween(String value1, String value2) {
+            addCriterion("cover not between", value1, value2, "cover");
+            return (Criteria) this;
+        }
+
         public Criteria andPositionIsNull() {
             addCriterion("`position` is null");
             return (Criteria) this;

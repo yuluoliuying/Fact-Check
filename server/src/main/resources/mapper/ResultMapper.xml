@@ -5,6 +5,7 @@
     <id column="rid" jdbcType="INTEGER" property="rid" />
     <result column="state" jdbcType="INTEGER" property="state" />
     <result column="result_name" jdbcType="VARCHAR" property="resultName" />
+    <result column="cover" jdbcType="VARCHAR" property="cover" />
     <result column="position" jdbcType="VARCHAR" property="position" />
     <result column="tag_name" jdbcType="VARCHAR" property="tagName" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
@@ -72,7 +73,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    rid, `state`, result_name, `position`, tag_name, update_time, release_time
+    rid, `state`, result_name, cover, `position`, tag_name, update_time, release_time
   </sql>
   <sql id="Blob_Column_List">
     description
@@ -127,11 +128,13 @@
   </delete>
   <insert id="insert" parameterType="com.factcheck.server.model.Result">
     insert into result (rid, `state`, result_name, 
-      `position`, tag_name, update_time, 
-      release_time, description)
+      cover, `position`, tag_name, 
+      update_time, release_time, description
+      )
     values (#{rid,jdbcType=INTEGER}, #{state,jdbcType=INTEGER}, #{resultName,jdbcType=VARCHAR}, 
-      #{position,jdbcType=VARCHAR}, #{tagName,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, 
-      #{releaseTime,jdbcType=TIMESTAMP}, #{description,jdbcType=LONGVARCHAR})
+      #{cover,jdbcType=VARCHAR}, #{position,jdbcType=VARCHAR}, #{tagName,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{releaseTime,jdbcType=TIMESTAMP}, #{description,jdbcType=LONGVARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.factcheck.server.model.Result">
     insert into result
@@ -144,6 +147,9 @@
       </if>
       <if test="resultName != null">
         result_name,
+      </if>
+      <if test="cover != null">
+        cover,
       </if>
       <if test="position != null">
         `position`,
@@ -170,6 +176,9 @@
       </if>
       <if test="resultName != null">
         #{resultName,jdbcType=VARCHAR},
+      </if>
+      <if test="cover != null">
+        #{cover,jdbcType=VARCHAR},
       </if>
       <if test="position != null">
         #{position,jdbcType=VARCHAR},
@@ -206,6 +215,9 @@
       <if test="record.resultName != null">
         result_name = #{record.resultName,jdbcType=VARCHAR},
       </if>
+      <if test="record.cover != null">
+        cover = #{record.cover,jdbcType=VARCHAR},
+      </if>
       <if test="record.position != null">
         `position` = #{record.position,jdbcType=VARCHAR},
       </if>
@@ -231,6 +243,7 @@
     set rid = #{record.rid,jdbcType=INTEGER},
       `state` = #{record.state,jdbcType=INTEGER},
       result_name = #{record.resultName,jdbcType=VARCHAR},
+      cover = #{record.cover,jdbcType=VARCHAR},
       `position` = #{record.position,jdbcType=VARCHAR},
       tag_name = #{record.tagName,jdbcType=VARCHAR},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP},
@@ -245,6 +258,7 @@
     set rid = #{record.rid,jdbcType=INTEGER},
       `state` = #{record.state,jdbcType=INTEGER},
       result_name = #{record.resultName,jdbcType=VARCHAR},
+      cover = #{record.cover,jdbcType=VARCHAR},
       `position` = #{record.position,jdbcType=VARCHAR},
       tag_name = #{record.tagName,jdbcType=VARCHAR},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP},
@@ -261,6 +275,9 @@
       </if>
       <if test="resultName != null">
         result_name = #{resultName,jdbcType=VARCHAR},
+      </if>
+      <if test="cover != null">
+        cover = #{cover,jdbcType=VARCHAR},
       </if>
       <if test="position != null">
         `position` = #{position,jdbcType=VARCHAR},
@@ -284,6 +301,7 @@
     update result
     set `state` = #{state,jdbcType=INTEGER},
       result_name = #{resultName,jdbcType=VARCHAR},
+      cover = #{cover,jdbcType=VARCHAR},
       `position` = #{position,jdbcType=VARCHAR},
       tag_name = #{tagName,jdbcType=VARCHAR},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
@@ -295,6 +313,7 @@
     update result
     set `state` = #{state,jdbcType=INTEGER},
       result_name = #{resultName,jdbcType=VARCHAR},
+      cover = #{cover,jdbcType=VARCHAR},
       `position` = #{position,jdbcType=VARCHAR},
       tag_name = #{tagName,jdbcType=VARCHAR},
       update_time = #{updateTime,jdbcType=TIMESTAMP},

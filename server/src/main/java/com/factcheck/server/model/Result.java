@@ -9,6 +9,8 @@ public class Result {
 
     private String resultName;
 
+    private String cover;
+
     private String position;
 
     private String tagName;
@@ -41,6 +43,14 @@ public class Result {
 
     public void setResultName(String resultName) {
         this.resultName = resultName;
+    }
+
+    public String getCover() {
+        return cover;
+    }
+
+    public void setCover(String cover) {
+        this.cover = cover;
     }
 
     public String getPosition() {
@@ -92,6 +102,7 @@ public class Result {
         sb.append(", rid=").append(rid);
         sb.append(", state=").append(state);
         sb.append(", resultName=").append(resultName);
+        sb.append(", cover=").append(cover);
         sb.append(", position=").append(position);
         sb.append(", tagName=").append(tagName);
         sb.append(", updateTime=").append(updateTime);
