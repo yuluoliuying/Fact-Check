@@ -17,7 +17,7 @@
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
   <div class="layui-header" style="background-color: rgb(205,87,18);">
-    <div class="layui-logo" style="color: #FFF; font-size: 20px; width: 160px;">factcheck</div>
+    <div class="layui-logo" style="color: #FFF; font-size: 20px; width: 160px;">Factcheck</div>
     <!-- 头部区域（可配合layui已有的水平导航） -->
     <ul class="layui-nav layui-layout-right">
         <li class="layui-nav-item">
@@ -59,30 +59,32 @@
       </ul>
     </div>
   </div>
- 
   <div class="layui-body" style="height: 660px;" id="layBody">
     <!-- 内容主体区域 -->
     <section>
         <div class="layui-tab layui-tab-brief" lay-filter="demo" lay-allowclose="true">
           <div class="layui-tab-content" style="height: 100px;">
             <div class="layui-tab-item layui-show">
+              <div class="layui-form-item">
+                <button type="submit" class="layui-btn layui-btn-sm layui-btn-normal" id="new_account">新增账号</button>
+              </div>
               <table class="table display" id="datatable">
-                <thead>
-                <tr>
-                    <th>流言名称</th>
-                    <th>审核时间</th>
-                    <th>操作</th>
-                </tr>
-                </thead>
-              </table>
+                  <thead>
+                  <tr>
+                      <th>用户名</th>
+                      <th>用户</th>
+                      <th>负责标签</th>
+                      <th>操作</th>
+                  </tr>
+                  </thead>
+                </table>
             </div>
           </div>
         </div>
     </section>
   </div>
 </div>
-
- <!-- 审核子页面 -->
+ <!-- 子页面 -->
 
 <script type="text/template" id="html2">
   <form class = "layui-form" action="">
@@ -91,52 +93,38 @@
         <div class="layui-form-item">
 
           <div class="layui-inline">
-            <label class="layui-form-label">流言编号</label>
+            <label class="layui-form-label">账户ID</label>
             <div class="layui-input-inline">
               <input type="text" id="id" autocomplete="off" placeholder="请输入标题" class="layui-input" readonly>
             </div>
           </div>
 
           <div class="layui-inline">
-            <label class="layui-form-label">流言名称</label>
+            <label class="layui-form-label">账户名称</label>
             <div class="layui-input-inline">
               <input type="text" id="name" autocomplete="off" placeholder="请输入标题" class="layui-input" readonly>
             </div>
           </div>
 			<div class="layui-inline">
-            <label class="layui-form-label">流言标签</label>
+            <label class="layui-form-label">账户密码</label>
             <div class="layui-input-inline">
               <input type="text" id="label" autocomplete="off" placeholder="请输入标题" class="layui-input" readonly>
             </div>
           </div>
-			<div class="layui-inline">
-            <label class="layui-form-label">流言地点</label>
-            <div class="layui-input-inline">
-              <input type="text" id="place" autocomplete="off" placeholder="请输入标题" class="layui-input" readonly>
-            </div>
+			
+		<div class="layui-form-item">
+          <label class="layui-form-label"></label>
+          <div class="layui-input-block" id="input1">
+              <button id="config" type="button" class="layui-btn layui-btn-normal">确认</button>
+              <button type="button" class="layui-btn" >返回</button>
           </div>
+		</div>
 
+         
 
-          <div class="layui-form-item layui-form-text">
-            <label class="layui-form-label">流言内容</label>
-            <div class="layui-input-block">
-              <textarea placeholder="请输入内容" class="layui-textarea"></textarea>
-            </div>
-          </div>
+          
 
-          <div class="layui-inline">
-              <label class="layui-form-label">附件查看</label>
-              <div class="layui-input-inline">
-                  <input type="text" id="attach" autocomplete="off" placeholder="请输入标题" class="layui-input" readonly>
-              </div>
-              <div class="layui-inline">
-                  <button type="button" class="layui-btn">下载</button>
-              </div>
-          </div>
-
-          <div class="layui-form-item layui-form-text">
-              
-          </div>
+          
 
           
       </fieldSet>
@@ -144,15 +132,42 @@
   </form>
 </script>
 
+ <!-- 权限分配子页面 -->
+ <script type="text/template" id="html1">
+  <br>
+  <form class = "layui-form" action="">
+
+
+  <div class="layui-form">
+    <div class="layui-form-item" >
+        <label class="layui-form-label">权限</label>
+        <div class="layui-input-block all">
+          <input type="checkbox" name="draft" title="标签1">
+          <input type="checkbox" name="countersign" title="标签2">
+          <input type="checkbox" name="final" title="标签3">
+          <input type="checkbox" name="examine" title="标签4">
+        </div>
+      </div>
+    </div>
+
+
+  <div class="layui-form-item">
+          <label class="layui-form-label"></label>
+          <div class="layui-input-block" id="input1">
+              <button id="config" type="button" class="layui-btn layui-btn-normal">确认</button>
+              <button type="button" class="layui-btn" >返回</button>
+          </div>
+  </div>
+</form>
+</script>
 
 <script src="layui/layui.js"></script>
 <script src="./utils.js"></script>
 <script>
-
 //JavaScript代码区域
-layui.use(['element', 'laydate','form'], function(){
-  var element = layui.element,
-  form = layui.form;
+layui.use(['form','element', 'laydate'], function(){
+  var element = layui.element;
+  var form = layui.form;
   form.render();
 });
   var box = document.getElementById("test")
@@ -174,11 +189,13 @@ layui.use(['element', 'laydate','form'], function(){
       }
   }
 
+  
   var dataSet = [
-    [ "流言一","2011/04/25"],
-    [ "流言二","2011/04/25"],
+    [ "41601","小明","A"],
+    [ "41602","小红","B"],
+    [ "41603","小强","C"]
+   
   ];
-
   var table = $('#datatable').DataTable({
     "searching": false,//是否展示搜索器
     "scrollY": 325,
@@ -198,40 +215,49 @@ layui.use(['element', 'laydate','form'], function(){
       },
        columnDefs: [
             {
-                targets: [0,2],
+                targets: [0,1,2,3],
                 "visible": true,
                  className: "text-align-c"
-            },{
-                targets: 1,
-                 className: "text-align-c",
-                render: function (data) {
-                    if (null == data) {
-                        return null;
-                    }
-                    return dateFormat(new Date(data), "yyyy-MM-dd");
-                }
             }, {
                 targets: -1,
                 width: 130,
                 render: function (data, type, row, meta) {
                     var btn = "";
+                        btn += "<button id=\""+row+"\" class=\"btn mr-5 btn-primary update_btn\">分配标签</button>";
 
-                        btn += "<button id=\"" + row + "\" class=\"btn mr-5 btn-primary update_btn\">详情</button>";
-                    
+                        
+
+                        //btn += "<button id=\"del_estimake_btn\" class=\"btn btn-secondary\">删除概算</button>";
                     return '<div>' + btn + '</div>';
                 }
             }]
     })
-  
 
-  var html2 = document.getElementById('html2').innerHTML
+    var html1 = document.getElementById('html1').innerHTML
+    $(".update_btn").click(function(){
+      layer.open({
+          type: 1,
+          title:"权限修改",
+          area: ['650px', '300px'], //宽高
+          content: html1,
+        });
 
-    $(".update_btn").click(function () {
+        var form = layui.form;
+        form.render();
+
+        $("#config").click(function(){
+          alert("ok");
+        })
+    })
+	var html2 = document.getElementById('html2').innerHTML
+
+    $(new_account).click(function () {
+	
       layer.open({
         type: 1,
-        title: "审批",
+        title: "新增账号",
         content: html2,
-        area:['600px','520px']
+        area:['400px','260px']
       });
 
       var form = layui.form;
@@ -243,10 +269,6 @@ layui.use(['element', 'laydate','form'], function(){
       ,layer = layui.layer
       ,util = layui.util; })     
     })
-
-    
-
-  
 </script>
 <link rel="stylesheet" type="text/css" href="首页.css">
 
