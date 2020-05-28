@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.factcheck.server.mapper.UserTagMapper">
   <resultMap id="BaseResultMap" type="com.factcheck.server.model.UserTag">
-    <id column="uid" jdbcType="INTEGER" property="uid" />
-    <id column="tid" jdbcType="INTEGER" property="tid" />
+    <id column="username" jdbcType="VARCHAR" property="username" />
+    <id column="tag_name" jdbcType="VARCHAR" property="tagName" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -64,7 +64,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    `uid`, tid
+    username, tag_name
   </sql>
   <select id="selectByExample" parameterType="com.factcheck.server.model.UserTagExample" resultMap="BaseResultMap">
     select
@@ -82,8 +82,8 @@
   </select>
   <delete id="deleteByPrimaryKey" parameterType="map">
     delete from user_tag
-    where `uid` = #{uid,jdbcType=INTEGER}
-      and tid = #{tid,jdbcType=INTEGER}
+    where username = #{username,jdbcType=VARCHAR}
+      and tag_name = #{tagName,jdbcType=VARCHAR}
   </delete>
   <delete id="deleteByExample" parameterType="com.factcheck.server.model.UserTagExample">
     delete from user_tag
@@ -92,25 +92,25 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.factcheck.server.model.UserTag">
-    insert into user_tag (`uid`, tid)
-    values (#{uid,jdbcType=INTEGER}, #{tid,jdbcType=INTEGER})
+    insert into user_tag (username, tag_name)
+    values (#{username,jdbcType=VARCHAR}, #{tagName,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.factcheck.server.model.UserTag">
     insert into user_tag
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="uid != null">
-        `uid`,
+      <if test="username != null">
+        username,
       </if>
-      <if test="tid != null">
-        tid,
+      <if test="tagName != null">
+        tag_name,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="uid != null">
-        #{uid,jdbcType=INTEGER},
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
       </if>
-      <if test="tid != null">
-        #{tid,jdbcType=INTEGER},
+      <if test="tagName != null">
+        #{tagName,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -123,11 +123,11 @@
   <update id="updateByExampleSelective" parameterType="map">
     update user_tag
     <set>
-      <if test="record.uid != null">
-        `uid` = #{record.uid,jdbcType=INTEGER},
+      <if test="record.username != null">
+        username = #{record.username,jdbcType=VARCHAR},
       </if>
-      <if test="record.tid != null">
-        tid = #{record.tid,jdbcType=INTEGER},
+      <if test="record.tagName != null">
+        tag_name = #{record.tagName,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -136,8 +136,8 @@
   </update>
   <update id="updateByExample" parameterType="map">
     update user_tag
-    set `uid` = #{record.uid,jdbcType=INTEGER},
-      tid = #{record.tid,jdbcType=INTEGER}
+    set username = #{record.username,jdbcType=VARCHAR},
+      tag_name = #{record.tagName,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>

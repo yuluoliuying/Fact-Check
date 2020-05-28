@@ -10,7 +10,7 @@ public interface UserTagMapper {
 
     int deleteByExample(UserTagExample example);
 
-    int deleteByPrimaryKey(@Param("uid") Integer uid, @Param("tid") Integer tid);
+    int deleteByPrimaryKey(@Param("username") String username, @Param("tagName") String tagName);
 
     int insert(UserTag record);
 

@@ -7,6 +7,8 @@ public class User {
 
     private String password;
 
+    private String roleName;
+
     public Integer getUid() {
         return uid;
     }
@@ -31,6 +33,14 @@ public class User {
         this.password = password;
     }
 
+    public String getRoleName() {
+        return roleName;
+    }
+
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -40,6 +50,7 @@ public class User {
         sb.append(", uid=").append(uid);
         sb.append(", username=").append(username);
         sb.append(", password=").append(password);
+        sb.append(", roleName=").append(roleName);
         sb.append("]");
         return sb.toString();
     }

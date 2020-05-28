@@ -104,123 +104,143 @@ public class UserTagExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
-        public Criteria andUidIsNull() {
-            addCriterion("`uid` is null");
+        public Criteria andUsernameIsNull() {
+            addCriterion("username is null");
             return (Criteria) this;
         }
 
-        public Criteria andUidIsNotNull() {
-            addCriterion("`uid` is not null");
+        public Criteria andUsernameIsNotNull() {
+            addCriterion("username is not null");
             return (Criteria) this;
         }
 
-        public Criteria andUidEqualTo(Integer value) {
-            addCriterion("`uid` =", value, "uid");
+        public Criteria andUsernameEqualTo(String value) {
+            addCriterion("username =", value, "username");
             return (Criteria) this;
         }
 
-        public Criteria andUidNotEqualTo(Integer value) {
-            addCriterion("`uid` <>", value, "uid");
+        public Criteria andUsernameNotEqualTo(String value) {
+            addCriterion("username <>", value, "username");
             return (Criteria) this;
         }
 
-        public Criteria andUidGreaterThan(Integer value) {
-            addCriterion("`uid` >", value, "uid");
+        public Criteria andUsernameGreaterThan(String value) {
+            addCriterion("username >", value, "username");
             return (Criteria) this;
         }
 
-        public Criteria andUidGreaterThanOrEqualTo(Integer value) {
-            addCriterion("`uid` >=", value, "uid");
+        public Criteria andUsernameGreaterThanOrEqualTo(String value) {
+            addCriterion("username >=", value, "username");
             return (Criteria) this;
         }
 
-        public Criteria andUidLessThan(Integer value) {
-            addCriterion("`uid` <", value, "uid");
+        public Criteria andUsernameLessThan(String value) {
+            addCriterion("username <", value, "username");
             return (Criteria) this;
         }
 
-        public Criteria andUidLessThanOrEqualTo(Integer value) {
-            addCriterion("`uid` <=", value, "uid");
+        public Criteria andUsernameLessThanOrEqualTo(String value) {
+            addCriterion("username <=", value, "username");
             return (Criteria) this;
         }
 
-        public Criteria andUidIn(List<Integer> values) {
-            addCriterion("`uid` in", values, "uid");
+        public Criteria andUsernameLike(String value) {
+            addCriterion("username like", value, "username");
             return (Criteria) this;
         }
 
-        public Criteria andUidNotIn(List<Integer> values) {
-            addCriterion("`uid` not in", values, "uid");
+        public Criteria andUsernameNotLike(String value) {
+            addCriterion("username not like", value, "username");
             return (Criteria) this;
         }
 
-        public Criteria andUidBetween(Integer value1, Integer value2) {
-            addCriterion("`uid` between", value1, value2, "uid");
+        public Criteria andUsernameIn(List<String> values) {
+            addCriterion("username in", values, "username");
             return (Criteria) this;
         }
 
-        public Criteria andUidNotBetween(Integer value1, Integer value2) {
-            addCriterion("`uid` not between", value1, value2, "uid");
+        public Criteria andUsernameNotIn(List<String> values) {
+            addCriterion("username not in", values, "username");
             return (Criteria) this;
         }
 
-        public Criteria andTidIsNull() {
-            addCriterion("tid is null");
+        public Criteria andUsernameBetween(String value1, String value2) {
+            addCriterion("username between", value1, value2, "username");
             return (Criteria) this;
         }
 
-        public Criteria andTidIsNotNull() {
-            addCriterion("tid is not null");
+        public Criteria andUsernameNotBetween(String value1, String value2) {
+            addCriterion("username not between", value1, value2, "username");
             return (Criteria) this;
         }
 
-        public Criteria andTidEqualTo(Integer value) {
-            addCriterion("tid =", value, "tid");
+        public Criteria andTagNameIsNull() {
+            addCriterion("tag_name is null");
             return (Criteria) this;
         }
 
-        public Criteria andTidNotEqualTo(Integer value) {
-            addCriterion("tid <>", value, "tid");
+        public Criteria andTagNameIsNotNull() {
+            addCriterion("tag_name is not null");
             return (Criteria) this;
         }
 
-        public Criteria andTidGreaterThan(Integer value) {
-            addCriterion("tid >", value, "tid");
+        public Criteria andTagNameEqualTo(String value) {
+            addCriterion("tag_name =", value, "tagName");
             return (Criteria) this;
         }
 
-        public Criteria andTidGreaterThanOrEqualTo(Integer value) {
-            addCriterion("tid >=", value, "tid");
+        public Criteria andTagNameNotEqualTo(String value) {
+            addCriterion("tag_name <>", value, "tagName");
             return (Criteria) this;
         }
 
-        public Criteria andTidLessThan(Integer value) {
-            addCriterion("tid <", value, "tid");
+        public Criteria andTagNameGreaterThan(String value) {
+            addCriterion("tag_name >", value, "tagName");
             return (Criteria) this;
         }
 
-        public Criteria andTidLessThanOrEqualTo(Integer value) {
-            addCriterion("tid <=", value, "tid");
+        public Criteria andTagNameGreaterThanOrEqualTo(String value) {
+            addCriterion("tag_name >=", value, "tagName");
             return (Criteria) this;
         }
 
-        public Criteria andTidIn(List<Integer> values) {
-            addCriterion("tid in", values, "tid");
+        public Criteria andTagNameLessThan(String value) {
+            addCriterion("tag_name <", value, "tagName");
             return (Criteria) this;
         }
 
-        public Criteria andTidNotIn(List<Integer> values) {
-            addCriterion("tid not in", values, "tid");
+        public Criteria andTagNameLessThanOrEqualTo(String value) {
+            addCriterion("tag_name <=", value, "tagName");
             return (Criteria) this;
         }
 
-        public Criteria andTidBetween(Integer value1, Integer value2) {
-            addCriterion("tid between", value1, value2, "tid");
+        public Criteria andTagNameLike(String value) {
+            addCriterion("tag_name like", value, "tagName");
             return (Criteria) this;
         }
 
-        public Criteria andTidNotBetween(Integer value1, Integer value2) {
-            addCriterion("tid not between", value1, value2, "tid");
+        public Criteria andTagNameNotLike(String value) {
+            addCriterion("tag_name not like", value, "tagName");
+            return (Criteria) this;
+        }
+
+        public Criteria andTagNameIn(List<String> values) {
+            addCriterion("tag_name in", values, "tagName");
+            return (Criteria) this;
+        }
+
+        public Criteria andTagNameNotIn(List<String> values) {
+            addCriterion("tag_name not in", values, "tagName");
+            return (Criteria) this;
+        }
+
+        public Criteria andTagNameBetween(String value1, String value2) {
+            addCriterion("tag_name between", value1, value2, "tagName");
+            return (Criteria) this;
+        }
+
+        public Criteria andTagNameNotBetween(String value1, String value2) {
+            addCriterion("tag_name not between", value1, value2, "tagName");
             return (Criteria) this;
         }
     }

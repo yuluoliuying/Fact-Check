@@ -1,24 +1,24 @@
 package com.factcheck.server.model;
 
 public class UserTag {
-    private Integer uid;
+    private String username;
 
-    private Integer tid;
+    private String tagName;
 
-    public Integer getUid() {
-        return uid;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUid(Integer uid) {
-        this.uid = uid;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public Integer getTid() {
-        return tid;
+    public String getTagName() {
+        return tagName;
     }
 
-    public void setTid(Integer tid) {
-        this.tid = tid;
+    public void setTagName(String tagName) {
+        this.tagName = tagName;
     }
 
     @Override
@@ -27,8 +27,8 @@ public class UserTag {
         sb.append(getClass().getSimpleName());
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
-        sb.append(", uid=").append(uid);
-        sb.append(", tid=").append(tid);
+        sb.append(", username=").append(username);
+        sb.append(", tagName=").append(tagName);
         sb.append("]");
         return sb.toString();
     }

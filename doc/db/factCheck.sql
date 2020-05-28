@@ -12,24 +12,16 @@ drop table if exists `tag`;
 
 create table `user`
 (
-    uid      integer auto_increment,
-    username varchar(100) unique not null,
-    password varchar(100)        not null,
+    uid       integer auto_increment,
+    username  varchar(100) unique not null,
+    password  varchar(100)        not null,
+    role_name varchar(100)        null,
     primary key (uid)
 );
 
-insert into `user`(username, password)
-values ('zzytql', '123456'),
-       ('ckftcl', '123456');
-
-create table `role`
-(
-    rid       integer auto_increment,
-    role_name varchar(100) not null,
-    uid       integer      not null,
-    primary key (rid),
-    foreign key (uid) references `user` (uid) on delete cascade
-);
+insert into `user`(username, password, role_name)
+values ('zzytql', '123456', '管理员'),
+       ('ckftcl', '123456', '管理员');
 
 create table `tag`
 (
@@ -38,13 +30,20 @@ create table `tag`
     primary key (tid)
 );
 
+insert into `tag`(tag_name)
+values ('科学'),
+       ('生活'),
+       ('政策'),
+       ('海外'),
+       ('国内');
+
 create table `user_tag`
 (
-    uid integer,
-    tid integer,
-    primary key (uid, tid),
-    foreign key (uid) references `user` (uid) on delete cascade,
-    foreign key (tid) references `tag` (tid) on delete cascade
+    username varchar(100),
+    tag_name varchar(100),
+    primary key (username, tag_name),
+    foreign key (username) references `user` (username) on delete cascade,
+    foreign key (tag_name) references `tag` (tag_name) on delete cascade
 );
 
 create table `message`
