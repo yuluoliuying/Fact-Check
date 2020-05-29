@@ -50,20 +50,21 @@ create table `message`
 (
     mid          integer auto_increment,
     message_name varchar(100) not null,
+    username     varchar(100) not null,
     cover        varchar(100) not null,
     description  mediumtext   not null,
     position     varchar(100) null,
     tag_name     varchar(100) null,
     upload_time  timestamp    not null,
-    primary key (mid)
+    primary key (mid),
+    foreign key (username) references `user` (username) on delete cascade
 );
 
 create table `message_state`
 (
     mid    integer,
     status integer,
-    time   timestamp not null,
-    primary key (mid, status),
+    primary key (mid),
     foreign key (mid) references `message` (mid) on delete cascade
 );
 
@@ -93,6 +94,8 @@ create table `message_log`
 create table `result`
 (
     rid          integer auto_increment,
+    mid          integer,
+    username     varchar(100) not null,
     state        integer      not null,
     result_name  varchar(100) not null,
     cover        varchar(100) not null,
@@ -101,5 +104,7 @@ create table `result`
     tag_name     varchar(100) not null,
     update_time  timestamp    not null,
     release_time timestamp    not null,
-    primary key (rid)
+    primary key (rid),
+    foreign key (mid) references `message` (mid) on delete cascade,
+    foreign key (username) references `user` (username) on delete cascade
 )

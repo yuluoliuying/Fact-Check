@@ -10,7 +10,7 @@ public interface MessageStateMapper {
 
     int deleteByExample(MessageStateExample example);
 
-    int deleteByPrimaryKey(@Param("mid") Integer mid, @Param("status") Integer status);
+    int deleteByPrimaryKey(Integer mid);
 
     int insert(MessageState record);
 
@@ -18,7 +18,7 @@ public interface MessageStateMapper {
 
     List<MessageState> selectByExample(MessageStateExample example);
 
-    MessageState selectByPrimaryKey(@Param("mid") Integer mid, @Param("status") Integer status);
+    MessageState selectByPrimaryKey(Integer mid);
 
     int updateByExampleSelective(@Param("record") MessageState record, @Param("example") MessageStateExample example);
 

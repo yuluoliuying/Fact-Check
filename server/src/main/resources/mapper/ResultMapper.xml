@@ -3,6 +3,8 @@
 <mapper namespace="com.factcheck.server.mapper.ResultMapper">
   <resultMap id="BaseResultMap" type="com.factcheck.server.model.Result">
     <id column="rid" jdbcType="INTEGER" property="rid" />
+    <result column="mid" jdbcType="INTEGER" property="mid" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
     <result column="state" jdbcType="INTEGER" property="state" />
     <result column="result_name" jdbcType="VARCHAR" property="resultName" />
     <result column="cover" jdbcType="VARCHAR" property="cover" />
@@ -73,7 +75,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    rid, `state`, result_name, cover, `position`, tag_name, update_time, release_time
+    rid, mid, username, `state`, result_name, cover, `position`, tag_name, update_time, 
+    release_time
   </sql>
   <sql id="Blob_Column_List">
     description
@@ -127,20 +130,26 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.factcheck.server.model.Result">
-    insert into result (rid, `state`, result_name, 
-      cover, `position`, tag_name, 
-      update_time, release_time, description
-      )
-    values (#{rid,jdbcType=INTEGER}, #{state,jdbcType=INTEGER}, #{resultName,jdbcType=VARCHAR}, 
-      #{cover,jdbcType=VARCHAR}, #{position,jdbcType=VARCHAR}, #{tagName,jdbcType=VARCHAR}, 
-      #{updateTime,jdbcType=TIMESTAMP}, #{releaseTime,jdbcType=TIMESTAMP}, #{description,jdbcType=LONGVARCHAR}
-      )
+    insert into result (rid, mid, username, 
+      `state`, result_name, cover, 
+      `position`, tag_name, update_time, 
+      release_time, description)
+    values (#{rid,jdbcType=INTEGER}, #{mid,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, 
+      #{state,jdbcType=INTEGER}, #{resultName,jdbcType=VARCHAR}, #{cover,jdbcType=VARCHAR}, 
+      #{position,jdbcType=VARCHAR}, #{tagName,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{releaseTime,jdbcType=TIMESTAMP}, #{description,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.factcheck.server.model.Result">
     insert into result
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="rid != null">
         rid,
+      </if>
+      <if test="mid != null">
+        mid,
+      </if>
+      <if test="username != null">
+        username,
       </if>
       <if test="state != null">
         `state`,
@@ -170,6 +179,12 @@
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="rid != null">
         #{rid,jdbcType=INTEGER},
+      </if>
+      <if test="mid != null">
+        #{mid,jdbcType=INTEGER},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
       </if>
       <if test="state != null">
         #{state,jdbcType=INTEGER},
@@ -209,6 +224,12 @@
       <if test="record.rid != null">
         rid = #{record.rid,jdbcType=INTEGER},
       </if>
+      <if test="record.mid != null">
+        mid = #{record.mid,jdbcType=INTEGER},
+      </if>
+      <if test="record.username != null">
+        username = #{record.username,jdbcType=VARCHAR},
+      </if>
       <if test="record.state != null">
         `state` = #{record.state,jdbcType=INTEGER},
       </if>
@@ -241,6 +262,8 @@
   <update id="updateByExampleWithBLOBs" parameterType="map">
     update result
     set rid = #{record.rid,jdbcType=INTEGER},
+      mid = #{record.mid,jdbcType=INTEGER},
+      username = #{record.username,jdbcType=VARCHAR},
       `state` = #{record.state,jdbcType=INTEGER},
       result_name = #{record.resultName,jdbcType=VARCHAR},
       cover = #{record.cover,jdbcType=VARCHAR},
@@ -256,6 +279,8 @@
   <update id="updateByExample" parameterType="map">
     update result
     set rid = #{record.rid,jdbcType=INTEGER},
+      mid = #{record.mid,jdbcType=INTEGER},
+      username = #{record.username,jdbcType=VARCHAR},
       `state` = #{record.state,jdbcType=INTEGER},
       result_name = #{record.resultName,jdbcType=VARCHAR},
       cover = #{record.cover,jdbcType=VARCHAR},
@@ -270,6 +295,12 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.factcheck.server.model.Result">
     update result
     <set>
+      <if test="mid != null">
+        mid = #{mid,jdbcType=INTEGER},
+      </if>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
       <if test="state != null">
         `state` = #{state,jdbcType=INTEGER},
       </if>
@@ -299,7 +330,9 @@
   </update>
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.factcheck.server.model.Result">
     update result
-    set `state` = #{state,jdbcType=INTEGER},
+    set mid = #{mid,jdbcType=INTEGER},
+      username = #{username,jdbcType=VARCHAR},
+      `state` = #{state,jdbcType=INTEGER},
       result_name = #{resultName,jdbcType=VARCHAR},
       cover = #{cover,jdbcType=VARCHAR},
       `position` = #{position,jdbcType=VARCHAR},
@@ -311,7 +344,9 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.factcheck.server.model.Result">
     update result
-    set `state` = #{state,jdbcType=INTEGER},
+    set mid = #{mid,jdbcType=INTEGER},
+      username = #{username,jdbcType=VARCHAR},
+      `state` = #{state,jdbcType=INTEGER},
       result_name = #{resultName,jdbcType=VARCHAR},
       cover = #{cover,jdbcType=VARCHAR},
       `position` = #{position,jdbcType=VARCHAR},

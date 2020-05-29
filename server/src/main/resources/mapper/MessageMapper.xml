@@ -4,6 +4,7 @@
   <resultMap id="BaseResultMap" type="com.factcheck.server.model.Message">
     <id column="mid" jdbcType="INTEGER" property="mid" />
     <result column="message_name" jdbcType="VARCHAR" property="messageName" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
     <result column="cover" jdbcType="VARCHAR" property="cover" />
     <result column="position" jdbcType="VARCHAR" property="position" />
     <result column="tag_name" jdbcType="VARCHAR" property="tagName" />
@@ -71,7 +72,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    mid, message_name, cover, `position`, tag_name, upload_time
+    mid, message_name, username, cover, `position`, tag_name, upload_time
   </sql>
   <sql id="Blob_Column_List">
     description
@@ -125,12 +126,12 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.factcheck.server.model.Message">
-    insert into message (mid, message_name, cover, 
-      `position`, tag_name, upload_time, 
-      description)
-    values (#{mid,jdbcType=INTEGER}, #{messageName,jdbcType=VARCHAR}, #{cover,jdbcType=VARCHAR}, 
-      #{position,jdbcType=VARCHAR}, #{tagName,jdbcType=VARCHAR}, #{uploadTime,jdbcType=TIMESTAMP}, 
-      #{description,jdbcType=LONGVARCHAR})
+    insert into message (mid, message_name, username, 
+      cover, `position`, tag_name, 
+      upload_time, description)
+    values (#{mid,jdbcType=INTEGER}, #{messageName,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
+      #{cover,jdbcType=VARCHAR}, #{position,jdbcType=VARCHAR}, #{tagName,jdbcType=VARCHAR}, 
+      #{uploadTime,jdbcType=TIMESTAMP}, #{description,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.factcheck.server.model.Message">
     insert into message
@@ -140,6 +141,9 @@
       </if>
       <if test="messageName != null">
         message_name,
+      </if>
+      <if test="username != null">
+        username,
       </if>
       <if test="cover != null">
         cover,
@@ -163,6 +167,9 @@
       </if>
       <if test="messageName != null">
         #{messageName,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
       </if>
       <if test="cover != null">
         #{cover,jdbcType=VARCHAR},
@@ -196,6 +203,9 @@
       <if test="record.messageName != null">
         message_name = #{record.messageName,jdbcType=VARCHAR},
       </if>
+      <if test="record.username != null">
+        username = #{record.username,jdbcType=VARCHAR},
+      </if>
       <if test="record.cover != null">
         cover = #{record.cover,jdbcType=VARCHAR},
       </if>
@@ -220,6 +230,7 @@
     update message
     set mid = #{record.mid,jdbcType=INTEGER},
       message_name = #{record.messageName,jdbcType=VARCHAR},
+      username = #{record.username,jdbcType=VARCHAR},
       cover = #{record.cover,jdbcType=VARCHAR},
       `position` = #{record.position,jdbcType=VARCHAR},
       tag_name = #{record.tagName,jdbcType=VARCHAR},
@@ -233,6 +244,7 @@
     update message
     set mid = #{record.mid,jdbcType=INTEGER},
       message_name = #{record.messageName,jdbcType=VARCHAR},
+      username = #{record.username,jdbcType=VARCHAR},
       cover = #{record.cover,jdbcType=VARCHAR},
       `position` = #{record.position,jdbcType=VARCHAR},
       tag_name = #{record.tagName,jdbcType=VARCHAR},
@@ -246,6 +258,9 @@
     <set>
       <if test="messageName != null">
         message_name = #{messageName,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
       </if>
       <if test="cover != null">
         cover = #{cover,jdbcType=VARCHAR},
@@ -268,6 +283,7 @@
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.factcheck.server.model.Message">
     update message
     set message_name = #{messageName,jdbcType=VARCHAR},
+      username = #{username,jdbcType=VARCHAR},
       cover = #{cover,jdbcType=VARCHAR},
       `position` = #{position,jdbcType=VARCHAR},
       tag_name = #{tagName,jdbcType=VARCHAR},
@@ -278,6 +294,7 @@
   <update id="updateByPrimaryKey" parameterType="com.factcheck.server.model.Message">
     update message
     set message_name = #{messageName,jdbcType=VARCHAR},
+      username = #{username,jdbcType=VARCHAR},
       cover = #{cover,jdbcType=VARCHAR},
       `position` = #{position,jdbcType=VARCHAR},
       tag_name = #{tagName,jdbcType=VARCHAR},

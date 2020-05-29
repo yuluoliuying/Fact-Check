@@ -5,6 +5,10 @@ import java.util.Date;
 public class Result {
     private Integer rid;
 
+    private Integer mid;
+
+    private String username;
+
     private Integer state;
 
     private String resultName;
@@ -27,6 +31,22 @@ public class Result {
 
     public void setRid(Integer rid) {
         this.rid = rid;
+    }
+
+    public Integer getMid() {
+        return mid;
+    }
+
+    public void setMid(Integer mid) {
+        this.mid = mid;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public Integer getState() {
@@ -100,6 +120,8 @@ public class Result {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", rid=").append(rid);
+        sb.append(", mid=").append(mid);
+        sb.append(", username=").append(username);
         sb.append(", state=").append(state);
         sb.append(", resultName=").append(resultName);
         sb.append(", cover=").append(cover);
