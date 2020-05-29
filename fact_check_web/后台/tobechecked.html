@@ -80,15 +80,13 @@
         <div class="layui-tab layui-tab-brief" lay-filter="demo" lay-allowclose="true">
           <div class="layui-tab-content" style="height: 100px;">
             <div class="layui-tab-item layui-show">
-              <div class="layui-form-item">
-                <button type="submit" class="layui-btn layui-btn-sm layui-btn-normal" id="new_account">新增账号</button>
-              </div>
+              
               <table class="table display" id="datatable">
                   <thead>
                   <tr>
-                      <th>用户ID</th>
-                      <th>用户</th>
-                      <th>负责标签</th>
+                      <th>需辟谣流言ID</th>
+                      <th>需辟谣流言名称</th>
+                      <th>需辟谣流言简述</th>
                       <th>操作</th>
                   </tr>
                   </thead>
@@ -99,53 +97,7 @@
     </section>
   </div>
 </div>
- <!-- 子页面 -->
 
-<script type="text/template" id="html2">
-  <form class = "layui-form" action="">
-    <div class="layui-form">
-      <fieldSet>
-        <div class="layui-form-item">
-
-          <div class="layui-inline">
-            <label class="layui-form-label">账户ID</label>
-            <div class="layui-input-inline">
-              <input type="text" id="id" autocomplete="off" placeholder="请输入标题" class="layui-input" readonly>
-            </div>
-          </div>
-
-          <div class="layui-inline">
-            <label class="layui-form-label">账户名称</label>
-            <div class="layui-input-inline">
-              <input type="text" id="name" autocomplete="off" placeholder="请输入标题" class="layui-input" readonly>
-            </div>
-          </div>
-			<div class="layui-inline">
-            <label class="layui-form-label">账户密码</label>
-            <div class="layui-input-inline">
-              <input type="text" id="label" autocomplete="off" placeholder="请输入标题" class="layui-input" readonly>
-            </div>
-          </div>
-			
-		<div class="layui-form-item">
-          <label class="layui-form-label"></label>
-          <div class="layui-input-block" id="input1">
-              <button id="config" type="button" class="layui-btn layui-btn-normal">确认</button>
-              <button type="button" class="layui-btn" >返回</button>
-          </div>
-		</div>
-
-         
-
-          
-
-          
-
-          
-      </fieldSet>
-    </div>
-  </form>
-</script>
 
  <!-- 权限分配子页面 -->
  <script type="text/template" id="html1">
@@ -155,11 +107,11 @@
 
   <div class="layui-form">
     <div class="layui-form-item" >
-        <label class="layui-form-label">权限</label>
+        <label class="layui-form-label">状态</label>
         <div class="layui-input-block all">
           <input type="checkbox" name="label1" title="标签1">
           <input type="checkbox" name="label2" title="标签2">
-          <input type="checkbox" name="label3" title="标签3">
+		  <input type="checkbox" name="label3" title="标签3">
           <input type="checkbox" name="label4" title="标签4">
         </div>
       </div>
@@ -206,9 +158,9 @@ layui.use(['form','element', 'laydate'], function(){
 
   
   var dataSet = [
-    [ "001","小明","A"],
-    [ "002","小红","B"],
-    [ "003","小强","C"]
+    [ "001","A","在A市发生了A事件"],
+    [ "002","B","在B市发生了B事件"],
+    [ "003","C","在C市发生了C事件"]
    
   ];
   var table = $('#datatable').DataTable({
@@ -238,7 +190,7 @@ layui.use(['form','element', 'laydate'], function(){
                 width: 130,
                 render: function (data, type, row, meta) {
                     var btn = "";
-                        btn += "<button id=\""+row+"\" class=\"btn mr-5 btn-primary update_btn\">分配标签</button>";
+                        btn += "<button id=\""+row+"\" class=\"btn mr-5 btn-primary update_btn\">确定辟谣并设置标签</button>";
 
                         
 
@@ -252,8 +204,8 @@ layui.use(['form','element', 'laydate'], function(){
     $(".update_btn").click(function(){
       layer.open({
           type: 1,
-          title:"权限修改",
-          area: ['650px', '300px'], //宽高
+          title:"设置标签并确认",
+          area: ['500px', '200px'], //宽高
           content: html1,
         });
 
@@ -264,26 +216,7 @@ layui.use(['form','element', 'laydate'], function(){
           alert("ok");
         })
     })
-	var html2 = document.getElementById('html2').innerHTML
-
-    $(new_account).click(function () {
 	
-      layer.open({
-        type: 1,
-        title: "新增账号",
-        content: html2,
-        area:['400px','260px']
-      });
-
-      var form = layui.form;
-          form.render();
-
-      layui.use(['transfer', 'layer', 'util'], function(){
-      var $ = layui.$
-      ,transfer = layui.transfer
-      ,layer = layui.layer
-      ,util = layui.util; })     
-    })
 </script>
 <link rel="stylesheet" type="text/css" href="首页.css">
 
