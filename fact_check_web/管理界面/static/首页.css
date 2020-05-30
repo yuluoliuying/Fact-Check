@@ -1,0 +1,215 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: rgb(239, 243, 246);
+}
+
+#btn {
+    position: absolute;
+    top: 29%;
+    left: 198px;
+    height: 72px;
+    width: 10px;
+    border: 0;
+    background: rgb(239, 243, 246);
+    color: #fff;
+    cursor: pointer;
+}
+
+.box {
+    float: left;
+    position: relative;
+    left: 0;
+    height: 1000px;
+    width: 180px;
+    margin-left: 0;
+    display: block;
+    background-color: rgb(239, 243, 246);
+    -moz-transition: margin-left 500ms;
+    transition: margin-left 500ms;
+}
+
+#layBody {
+    left: 210px;
+    -moz-transition: margin-left 500ms;
+    transition: margin-left 500ms;
+}
+#laySide {
+    -moz-transition: margin-left 500ms;
+    transition: margin-left 500ms;
+}
+
+section {
+    height: 100%;
+    background: #fff;
+    border: 10px solid rgb(239, 243, 246);
+    border-left-width: 0;
+}
+
+.layui-tab-brief>.layui-tab-more li.layui-this:after, .layui-tab-brief>.layui-tab-title .layui-this:after {
+    border: none;
+    border-radius: 0;
+    border-bottom: 2px solid rgb(26,123,204);
+}
+.layui-tab-brief>.layui-tab-title .layui-this {
+    color: rgb(26,123,204);
+}
+
+.layui-form-label{
+    width: 115px;
+}
+
+.layui-form-item .layui-input-inline {
+    float: left;
+    width: 180px;
+    margin-right: 10px;
+}
+
+.layui-btn-normal {
+    background-color: rgb(0, 139, 227);
+}
+
+.layui-btn-primary {
+    background-color: rgb(223, 233 ,237);
+    color: #000;
+}
+
+.dataTables_wrapper .dataTables_length {
+    float: right;
+    padding-top: 0.5em;
+}
+.dataTables_wrapper  th{
+    text-align: center;
+}
+.dataTables_wrapper .dataTables_info {
+    float: right;
+    padding-top: 0.5em;
+    clear: none;
+}
+
+.dataTables_wrapper .dataTables_paginate {
+    float: right;
+    text-align: right;
+    padding-top: 0.25em;
+}
+
+.text-align-l{
+    text-align: left;
+}
+
+.text-align-c{
+    text-align: center;
+}
+.text-align-r{
+    text-align: right;
+}
+
+.layui-layer-title {
+    color: rgb(0, 139, 227);
+    background-color: #fff;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.layui-nav-tree .layui-nav-bar {
+    background-color: rgb(26, 122, 205);
+}
+.layui-nav .layui-this:after, .layui-nav-bar, .layui-nav-tree .layui-nav-itemed:after {
+    background-color: rgb(26, 122, 205);
+}
+.layui-nav-tree .layui-nav-child dd.layui-this, .layui-nav-tree .layui-nav-child dd.layui-this a, .layui-nav-tree .layui-this, .layui-nav-tree .layui-this>a, .layui-nav-tree .layui-this>a:hover {
+    background-color: rgb(26, 122, 205);
+}
+
+.dataTables_scrollHeadInner{
+    width: 100% !important;
+}
+.dataTables_wrapper.no-footer div.dataTables_scrollHead table.dataTable, .dataTables_wrapper.no-footer div.dataTables_scrollBody>table {
+    width: 100% !important;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    background-color: rgb(227, 229, 242);
+    color: #fff !important;
+    padding: 0.25em 0.5em;
+    margin-left: 4px;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover{
+    background: none;
+    background-color: rgb(26, 122, 205);
+    border: 1px solid rgb(227, 229, 242);
+    color: #fff !important;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button.disabled, .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:hover, .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:active {
+    background-color: rgb(227, 229, 242);
+    color: #fff !important;
+}
+.dataTables_wrapper .dataTables_paginate {
+    font-size: 13px;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover{
+    background: none;
+    border: 1px solid rgb(227, 229, 242);
+    color: rgb(26, 122, 205) !important;
+}
+
+#btn2:hover{
+    border: 1px solid rgb(227, 229, 242);
+}
+
+.update_btn {
+    background: none;
+    background-color: rgb(0, 139, 227);
+    padding: 3px 10px;
+    font-size: 12px;
+    margin-left: 4px;
+    border: 1px solid rgb(227, 229, 242);
+}
+.update_btn:hover {
+    background-color: rgb(2, 155, 250);
+    border: 1px solid rgb(227, 229, 242);
+}
+.del_btn{
+    background: none;
+    background-color: rgb(223, 233, 237);
+    padding: 3px 10px;
+    font-size: 12px;
+    margin-left: 4px;
+}
+.del_btn:hover{
+    background-color: rgb(237, 247, 252);
+    border: 1px solid rgb(227, 229, 242);
+}
+label {
+    font-weight: unset;
+}
+
+.layui-form-item .layui-inline {
+    margin-right: 0px;
+}
+#date1, #date2{
+    background: url("images/4列表页_03.png") no-repeat;
+    background-position-x: 95%;
+    background-position-y: 50%;
+}
+.layui-laydate .layui-this {
+    background-color: rgb(26, 122, 205)!important;
+}
+
+#select1{
+    width: 180px;
+    height: 38px;
+    border: 1px solid rgb(230, 230, 230);
+}
+
+.error{
+    color: red;
+    border-color: red; 
+}
+.layui-input, .layui-textarea {
+    color: black !important;
+}
+
