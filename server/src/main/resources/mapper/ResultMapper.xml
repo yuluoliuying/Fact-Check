@@ -5,7 +5,6 @@
     <id column="rid" jdbcType="INTEGER" property="rid" />
     <result column="mid" jdbcType="INTEGER" property="mid" />
     <result column="username" jdbcType="VARCHAR" property="username" />
-    <result column="state" jdbcType="INTEGER" property="state" />
     <result column="result_name" jdbcType="VARCHAR" property="resultName" />
     <result column="cover" jdbcType="VARCHAR" property="cover" />
     <result column="position" jdbcType="VARCHAR" property="position" />
@@ -75,8 +74,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    rid, mid, username, `state`, result_name, cover, `position`, tag_name, update_time, 
-    release_time
+    rid, mid, username, result_name, cover, `position`, tag_name, update_time, release_time
   </sql>
   <sql id="Blob_Column_List">
     description
@@ -131,13 +129,13 @@
   </delete>
   <insert id="insert" parameterType="com.factcheck.server.model.Result">
     insert into result (rid, mid, username, 
-      `state`, result_name, cover, 
-      `position`, tag_name, update_time, 
-      release_time, description)
+      result_name, cover, `position`, 
+      tag_name, update_time, release_time, 
+      description)
     values (#{rid,jdbcType=INTEGER}, #{mid,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, 
-      #{state,jdbcType=INTEGER}, #{resultName,jdbcType=VARCHAR}, #{cover,jdbcType=VARCHAR}, 
-      #{position,jdbcType=VARCHAR}, #{tagName,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, 
-      #{releaseTime,jdbcType=TIMESTAMP}, #{description,jdbcType=LONGVARCHAR})
+      #{resultName,jdbcType=VARCHAR}, #{cover,jdbcType=VARCHAR}, #{position,jdbcType=VARCHAR}, 
+      #{tagName,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{releaseTime,jdbcType=TIMESTAMP}, 
+      #{description,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.factcheck.server.model.Result">
     insert into result
@@ -150,9 +148,6 @@
       </if>
       <if test="username != null">
         username,
-      </if>
-      <if test="state != null">
-        `state`,
       </if>
       <if test="resultName != null">
         result_name,
@@ -185,9 +180,6 @@
       </if>
       <if test="username != null">
         #{username,jdbcType=VARCHAR},
-      </if>
-      <if test="state != null">
-        #{state,jdbcType=INTEGER},
       </if>
       <if test="resultName != null">
         #{resultName,jdbcType=VARCHAR},
@@ -230,9 +222,6 @@
       <if test="record.username != null">
         username = #{record.username,jdbcType=VARCHAR},
       </if>
-      <if test="record.state != null">
-        `state` = #{record.state,jdbcType=INTEGER},
-      </if>
       <if test="record.resultName != null">
         result_name = #{record.resultName,jdbcType=VARCHAR},
       </if>
@@ -264,7 +253,6 @@
     set rid = #{record.rid,jdbcType=INTEGER},
       mid = #{record.mid,jdbcType=INTEGER},
       username = #{record.username,jdbcType=VARCHAR},
-      `state` = #{record.state,jdbcType=INTEGER},
       result_name = #{record.resultName,jdbcType=VARCHAR},
       cover = #{record.cover,jdbcType=VARCHAR},
       `position` = #{record.position,jdbcType=VARCHAR},
@@ -281,7 +269,6 @@
     set rid = #{record.rid,jdbcType=INTEGER},
       mid = #{record.mid,jdbcType=INTEGER},
       username = #{record.username,jdbcType=VARCHAR},
-      `state` = #{record.state,jdbcType=INTEGER},
       result_name = #{record.resultName,jdbcType=VARCHAR},
       cover = #{record.cover,jdbcType=VARCHAR},
       `position` = #{record.position,jdbcType=VARCHAR},
@@ -300,9 +287,6 @@
       </if>
       <if test="username != null">
         username = #{username,jdbcType=VARCHAR},
-      </if>
-      <if test="state != null">
-        `state` = #{state,jdbcType=INTEGER},
       </if>
       <if test="resultName != null">
         result_name = #{resultName,jdbcType=VARCHAR},
@@ -332,7 +316,6 @@
     update result
     set mid = #{mid,jdbcType=INTEGER},
       username = #{username,jdbcType=VARCHAR},
-      `state` = #{state,jdbcType=INTEGER},
       result_name = #{resultName,jdbcType=VARCHAR},
       cover = #{cover,jdbcType=VARCHAR},
       `position` = #{position,jdbcType=VARCHAR},
@@ -346,7 +329,6 @@
     update result
     set mid = #{mid,jdbcType=INTEGER},
       username = #{username,jdbcType=VARCHAR},
-      `state` = #{state,jdbcType=INTEGER},
       result_name = #{resultName,jdbcType=VARCHAR},
       cover = #{cover,jdbcType=VARCHAR},
       `position` = #{position,jdbcType=VARCHAR},

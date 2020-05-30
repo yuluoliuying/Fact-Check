@@ -96,7 +96,6 @@ create table `result`
     rid          integer auto_increment,
     mid          integer,
     username     varchar(100) not null,
-    state        integer      not null,
     result_name  varchar(100) not null,
     cover        varchar(100) not null,
     description  mediumtext   not null,

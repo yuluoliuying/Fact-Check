@@ -1,22 +1,27 @@
 package com.factcheck.server.model;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import java.util.Date;
 
+@ApiModel("流言")
 public class Message {
+    @ApiModelProperty("流言id")
     private Integer mid;
-
+    @ApiModelProperty("流言标题（名）")
     private String messageName;
-
+    @ApiModelProperty("上传流言用户名")
     private String username;
-
+    @ApiModelProperty("封面")
     private String cover;
-
+    @ApiModelProperty("相关地点")
     private String position;
-
+    @ApiModelProperty("标签")
     private String tagName;
-
+    @ApiModelProperty("上传时间")
     private Date uploadTime;
-
+    @ApiModelProperty("流言内容（描述）")
     private String description;
 
     public Integer getMid() {

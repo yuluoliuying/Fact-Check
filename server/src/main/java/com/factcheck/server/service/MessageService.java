@@ -86,7 +86,7 @@ public class MessageService {
 
     public List<Message> getAllFinishedMessages() {
         MessageStateExample messageStateExample = new MessageStateExample();
-        messageStateExample.createCriteria().andStatusEqualTo(4);
+        messageStateExample.createCriteria().andStatusEqualTo(3);
         return getMessages(messageStateExample);
     }
 
