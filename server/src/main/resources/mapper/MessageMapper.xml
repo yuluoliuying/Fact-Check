@@ -5,7 +5,6 @@
     <id column="mid" jdbcType="INTEGER" property="mid" />
     <result column="message_name" jdbcType="VARCHAR" property="messageName" />
     <result column="username" jdbcType="VARCHAR" property="username" />
-    <result column="cover" jdbcType="VARCHAR" property="cover" />
     <result column="position" jdbcType="VARCHAR" property="position" />
     <result column="tag_name" jdbcType="VARCHAR" property="tagName" />
     <result column="upload_time" jdbcType="TIMESTAMP" property="uploadTime" />
@@ -72,7 +71,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    mid, message_name, username, cover, `position`, tag_name, upload_time
+    mid, message_name, username, `position`, tag_name, upload_time
   </sql>
   <sql id="Blob_Column_List">
     description
@@ -126,27 +125,27 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.factcheck.server.model.Message">
-    insert into message (mid, message_name, username, 
-      cover, `position`, tag_name, 
-      upload_time, description)
-    values (#{mid,jdbcType=INTEGER}, #{messageName,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
-      #{cover,jdbcType=VARCHAR}, #{position,jdbcType=VARCHAR}, #{tagName,jdbcType=VARCHAR}, 
-      #{uploadTime,jdbcType=TIMESTAMP}, #{description,jdbcType=LONGVARCHAR})
+    <selectKey keyProperty="mid" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into message (message_name, username, `position`, 
+      tag_name, upload_time, description
+      )
+    values (#{messageName,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{position,jdbcType=VARCHAR}, 
+      #{tagName,jdbcType=VARCHAR}, #{uploadTime,jdbcType=TIMESTAMP}, #{description,jdbcType=LONGVARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.factcheck.server.model.Message">
+    <selectKey keyProperty="mid" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into message
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="mid != null">
-        mid,
-      </if>
       <if test="messageName != null">
         message_name,
       </if>
       <if test="username != null">
         username,
-      </if>
-      <if test="cover != null">
-        cover,
       </if>
       <if test="position != null">
         `position`,
@@ -162,17 +161,11 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="mid != null">
-        #{mid,jdbcType=INTEGER},
-      </if>
       <if test="messageName != null">
         #{messageName,jdbcType=VARCHAR},
       </if>
       <if test="username != null">
         #{username,jdbcType=VARCHAR},
-      </if>
-      <if test="cover != null">
-        #{cover,jdbcType=VARCHAR},
       </if>
       <if test="position != null">
         #{position,jdbcType=VARCHAR},
@@ -206,9 +199,6 @@
       <if test="record.username != null">
         username = #{record.username,jdbcType=VARCHAR},
       </if>
-      <if test="record.cover != null">
-        cover = #{record.cover,jdbcType=VARCHAR},
-      </if>
       <if test="record.position != null">
         `position` = #{record.position,jdbcType=VARCHAR},
       </if>
@@ -231,7 +221,6 @@
     set mid = #{record.mid,jdbcType=INTEGER},
       message_name = #{record.messageName,jdbcType=VARCHAR},
       username = #{record.username,jdbcType=VARCHAR},
-      cover = #{record.cover,jdbcType=VARCHAR},
       `position` = #{record.position,jdbcType=VARCHAR},
       tag_name = #{record.tagName,jdbcType=VARCHAR},
       upload_time = #{record.uploadTime,jdbcType=TIMESTAMP},
@@ -245,7 +234,6 @@
     set mid = #{record.mid,jdbcType=INTEGER},
       message_name = #{record.messageName,jdbcType=VARCHAR},
       username = #{record.username,jdbcType=VARCHAR},
-      cover = #{record.cover,jdbcType=VARCHAR},
       `position` = #{record.position,jdbcType=VARCHAR},
       tag_name = #{record.tagName,jdbcType=VARCHAR},
       upload_time = #{record.uploadTime,jdbcType=TIMESTAMP}
@@ -261,9 +249,6 @@
       </if>
       <if test="username != null">
         username = #{username,jdbcType=VARCHAR},
-      </if>
-      <if test="cover != null">
-        cover = #{cover,jdbcType=VARCHAR},
       </if>
       <if test="position != null">
         `position` = #{position,jdbcType=VARCHAR},
@@ -284,7 +269,6 @@
     update message
     set message_name = #{messageName,jdbcType=VARCHAR},
       username = #{username,jdbcType=VARCHAR},
-      cover = #{cover,jdbcType=VARCHAR},
       `position` = #{position,jdbcType=VARCHAR},
       tag_name = #{tagName,jdbcType=VARCHAR},
       upload_time = #{uploadTime,jdbcType=TIMESTAMP},
@@ -295,7 +279,6 @@
     update message
     set message_name = #{messageName,jdbcType=VARCHAR},
       username = #{username,jdbcType=VARCHAR},
-      cover = #{cover,jdbcType=VARCHAR},
       `position` = #{position,jdbcType=VARCHAR},
       tag_name = #{tagName,jdbcType=VARCHAR},
       upload_time = #{uploadTime,jdbcType=TIMESTAMP}

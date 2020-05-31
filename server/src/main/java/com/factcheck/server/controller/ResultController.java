@@ -61,7 +61,7 @@ public class ResultController {
     @ApiOperation("第二次审核文章（即根据通过第一次审核的流言起草的文章）")
     @PostMapping("/checkResult")
     public String checkResult(@RequestBody CheckInformation record) {
-        return resultService.checkResult(record.mid, record.status, record.content, record.username);
+        return resultService.checkResult(record.rid,record.mid, record.status, record.content, record.username);
     }
 
     @Data
@@ -83,6 +83,8 @@ public class ResultController {
     private static class CheckInformation {
         @ApiModelProperty("流言id（注意这个id是文章相关的流言的id，不是文章id）")
         private Integer mid;
+        @ApiModelProperty("文章id")
+        private Integer rid;
         @ApiModelProperty("审核状态（通过为 1 不通过为 -1）")
         private Integer status;
         @ApiModelProperty("审核意见")

@@ -40,14 +40,22 @@
                              targetPackage="com.factcheck.server.mapper"
                              type="XMLMAPPER"/>
 
-        <table tableName="user" domainObjectName="User"/>
+        <table tableName="user" domainObjectName="User">
+            <generatedKey column="uid" sqlStatement="Mysql" identity="true"/>
+        </table>
         <table tableName="user_tag" domainObjectName="UserTag"/>
-        <table tableName="tag" domainObjectName="Tag"/>
-        <table tableName="role" domainObjectName="Role"/>
-        <table tableName="result" domainObjectName="Result"/>
+        <table tableName="tag" domainObjectName="Tag">
+            <generatedKey column="tid" sqlStatement="Mysql" identity="true"/>
+        </table>
+        <table tableName="result" domainObjectName="Result">
+            <generatedKey column="rid" sqlStatement="Mysql" identity="true"/>
+        </table>
         <table tableName="message_state" domainObjectName="MessageState"/>
         <table tableName="message_process" domainObjectName="MessageProcess"/>
         <table tableName="message_log" domainObjectName="MessageLog"/>
-        <table tableName="message" domainObjectName="Message"/>
+        <table tableName="message" domainObjectName="Message">
+            <generatedKey column="mid" sqlStatement="Mysql" identity="true"/>
+        </table>
+        <table tableName="result_state" domainObjectName="ResultState"/>
     </context>
 </generatorConfiguration>

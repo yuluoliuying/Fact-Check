@@ -97,23 +97,23 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.factcheck.server.model.Tag">
-    insert into tag (tid, tag_name)
-    values (#{tid,jdbcType=INTEGER}, #{tagName,jdbcType=VARCHAR})
+    <selectKey keyProperty="tid" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into tag (tag_name)
+    values (#{tagName,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.factcheck.server.model.Tag">
+    <selectKey keyProperty="tid" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into tag
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="tid != null">
-        tid,
-      </if>
       <if test="tagName != null">
         tag_name,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="tid != null">
-        #{tid,jdbcType=INTEGER},
-      </if>
       <if test="tagName != null">
         #{tagName,jdbcType=VARCHAR},
       </if>

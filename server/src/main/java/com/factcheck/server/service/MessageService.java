@@ -35,7 +35,7 @@ public class MessageService {
         return "成功提交流言";
     }
 
-    public String updateMessageTag(String tagName, Integer mid,String username) {
+    public String updateMessageTag(String tagName, Integer mid, String username) {
         Message message = messageMapper.selectByPrimaryKey(mid);
         if (message == null) {
             return "此流言不存在";
@@ -47,7 +47,7 @@ public class MessageService {
         return "操作成功";
     }
 
-    public String checkMessageValue(Integer mid, Integer status, String content,String username) {
+    public String checkMessageValue(Integer mid, Integer status, String content, String username) {
         MessageState messageState = new MessageState();
         MessageProcess messageProcess = new MessageProcess();
         messageState.setMid(mid);
@@ -93,6 +93,9 @@ public class MessageService {
 
     private List<Message> getMessages(MessageStateExample messageStateExample) {
         List<MessageState> messageStates = messageStateMapper.selectByExample(messageStateExample);
+        if (messageStates.size() == 0) {
+            return new ArrayList<>();
+        }
         MessageExample messageExample = new MessageExample();
         List<Integer> midList = new ArrayList<>();
         for (MessageState state : messageStates) {

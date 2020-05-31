@@ -7,7 +7,7 @@ drop table if exists `message_log`;
 drop table if exists `message`;
 drop table if exists `user`;
 drop table if exists `tag`;
-
+drop table if exists `result_state`;
 
 
 create table `user`
@@ -50,8 +50,7 @@ create table `message`
 (
     mid          integer auto_increment,
     message_name varchar(100) not null,
-    username     varchar(100) not null,
-    cover        varchar(100) not null,
+    username     varchar(100) null,
     description  mediumtext   not null,
     position     varchar(100) null,
     tag_name     varchar(100) null,
@@ -106,4 +105,11 @@ create table `result`
     primary key (rid),
     foreign key (mid) references `message` (mid) on delete cascade,
     foreign key (username) references `user` (username) on delete cascade
+);
+
+create table `result_state`(
+    rid integer,
+    state integer not null ,
+    primary key (rid),
+    foreign key (rid) references `result`(rid) on delete cascade
 )
