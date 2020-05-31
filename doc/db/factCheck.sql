@@ -52,7 +52,7 @@ create table `message`
     mid          integer auto_increment,
     message_name varchar(100) not null,
     username     varchar(100) null,
-    description  text   not null,
+    description  mediumtext  not null,
     position     varchar(100) null,
     tag_name     varchar(100) null,
     upload_time  timestamp    not null,
@@ -75,7 +75,7 @@ create table `message_process`
     type        integer      not null,
     state       integer      not null,
     username    varchar(100) null,
-    content     text,
+    content     mediumtext,
     primary key (process_num),
     foreign key (mid) references `message` (mid) on delete cascade,
     foreign key (username) references `user` (username) on delete cascade
@@ -85,7 +85,7 @@ create table `message_log`
 (
     lid         integer auto_increment,
     username    varchar(100) null,
-    content     text         not null,
+    content     mediumtext         not null,
     upload_time timestamp    not null,
     primary key (lid),
     foreign key (username) references `user` (username) on delete cascade
@@ -98,7 +98,7 @@ create table `result`
     username     varchar(100) null,
     result_name  varchar(100) not null,
     cover        varchar(100) not null,
-    description  text   not null,
+    description  mediumtext   not null,
     position     varchar(100) null,
     tag_name     varchar(100) not null,
     update_time  timestamp    not null,
