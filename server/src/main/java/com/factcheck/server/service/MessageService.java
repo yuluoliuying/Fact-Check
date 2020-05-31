@@ -69,7 +69,7 @@ public class MessageService {
 
     public List<Message> getAllMessages() {
         MessageExample messageExample = new MessageExample();
-        return messageMapper.selectByExample(messageExample);
+        return messageMapper.selectByExampleWithBLOBs(messageExample);
     }
 
     public List<Message> getAllUnCheckedMessages() {
@@ -102,7 +102,7 @@ public class MessageService {
             midList.add(state.getMid());
         }
         messageExample.createCriteria().andMidIn(midList);
-        return messageMapper.selectByExample(messageExample);
+        return messageMapper.selectByExampleWithBLOBs(messageExample);
     }
 
 
