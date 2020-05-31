@@ -1,5 +1,6 @@
 drop table if exists `role`;
 drop table if exists `user_tag`;
+drop table if exists `result_state`;
 drop table if exists `result`;
 drop table if exists `message_state`;
 drop table if exists `message_process`;
@@ -7,7 +8,7 @@ drop table if exists `message_log`;
 drop table if exists `message`;
 drop table if exists `user`;
 drop table if exists `tag`;
-drop table if exists `result_state`;
+
 
 
 create table `user`
@@ -73,7 +74,7 @@ create table `message_process`
     mid         integer      not null,
     type        integer      not null,
     state       integer      not null,
-    username    varchar(100) not null,
+    username    varchar(100) null,
     content     text,
     primary key (process_num),
     foreign key (mid) references `message` (mid) on delete cascade,
@@ -83,7 +84,7 @@ create table `message_process`
 create table `message_log`
 (
     lid         integer auto_increment,
-    username    varchar(100) not null,
+    username    varchar(100) null,
     content     text         not null,
     upload_time timestamp    not null,
     primary key (lid),
@@ -94,7 +95,7 @@ create table `result`
 (
     rid          integer auto_increment,
     mid          integer,
-    username     varchar(100) not null,
+    username     varchar(100) null,
     result_name  varchar(100) not null,
     cover        varchar(100) not null,
     description  mediumtext   not null,
