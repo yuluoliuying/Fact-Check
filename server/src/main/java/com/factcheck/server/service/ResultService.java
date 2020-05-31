@@ -53,7 +53,7 @@ public class ResultService {
             }
             resultExample.createCriteria().andRidIn(new ArrayList<>(set));
         }
-        return resultMapper.selectByExample(resultExample);
+        return resultMapper.selectByExampleWithBLOBs(resultExample);
     }
 
     public List<Result> getRecentResult(Integer index) {
@@ -65,7 +65,7 @@ public class ResultService {
             resultExample.setOrderByClause("`release_time` ASC");
             resultExample.createCriteria().andReleaseTimeLessThan(new Date());
 
-            List<Result> origin = resultMapper.selectByExample(resultExample);
+            List<Result> origin = resultMapper.selectByExampleWithBLOBs(resultExample);
             if(origin.size() == 0){
                 return new ArrayList<>();
             }
