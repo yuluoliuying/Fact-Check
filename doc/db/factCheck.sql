@@ -33,9 +33,8 @@ create table `tag`
 
 insert into `tag`(tag_name)
 values ('科学'),
-       ('生活'),
+       ('国际'),
        ('政策'),
-       ('海外'),
        ('国内');
 
 create table `user_tag`
