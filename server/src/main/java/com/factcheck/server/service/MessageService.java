@@ -40,14 +40,19 @@ public class MessageService {
         if (message == null) {
             return "此流言不存在";
         }
-        String originTag = message.getTagName();
-        String newTag = originTag + " " + tagName;
-        message.setTagName(newTag);
+        message.setTagName(tagName);
         messageMapper.updateByPrimaryKey(message);
         return "操作成功";
     }
 
-    public String checkMessageValue(Integer mid, Integer status,String username) {
+    public String deleteMessageTag(Integer mid){
+        Message message = messageMapper.selectByPrimaryKey(mid);
+        message.setTagName(null);
+        messageMapper.updateByPrimaryKey(message);
+        return "操作成功";
+    }
+
+    public String checkMessageValue(Integer mid, Integer status, String username, String tagName) {
         MessageState messageState = new MessageState();
         MessageProcess messageProcess = new MessageProcess();
         messageState.setMid(mid);
@@ -62,6 +67,10 @@ public class MessageService {
         messageProcess.setUsername(username);
         messageStateMapper.updateByPrimaryKey(messageState);
         messageProcessMapper.insert(messageProcess);
+
+        Message message = messageMapper.selectByPrimaryKey(mid);
+        message.setTagName(tagName);
+        messageMapper.updateByPrimaryKey(message);
         return "操作完成";
     }
 
