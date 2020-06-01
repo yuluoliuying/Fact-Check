@@ -7,10 +7,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiOperation;
 import lombok.Data;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -26,7 +23,7 @@ public class MessageController {
     @ApiOperation("第一次审核流言")
     @PostMapping("/checkMessage")
     public String checkMessageValue(@RequestBody CheckInformation record) {
-        return messageService.checkMessageValue(record.mid, record.status, record.username);
+        return messageService.checkMessageValue(record.mid, record.status, record.username, record.tagName);
     }
 
     @ApiOperation("查询所有流言")
@@ -62,7 +59,13 @@ public class MessageController {
     @ApiOperation("更新一条流言的标签")
     @PostMapping("/updateMessageTag")
     public String updateMessageTag(@RequestBody TagInformation record) {
-        return messageService.updateMessageTag(record.tagName, record.mid,record.username);
+        return messageService.updateMessageTag(record.tagName, record.mid, record.username);
+    }
+
+    @ApiOperation("清空流言标签")
+    @DeleteMapping("/deleteMessageTag")
+    public String deleteMessageTag(@RequestBody Mid mid) {
+        return messageService.deleteMessageTag(mid.mid);
     }
 
     @Data
@@ -74,6 +77,8 @@ public class MessageController {
         private Integer status;
         @ApiModelProperty("审核人员用户名")
         private String username;
+        @ApiModelProperty("流言标签")
+        private String tagName;
     }
 
     @Data
@@ -85,5 +90,12 @@ public class MessageController {
         private Integer mid;
         @ApiModelProperty("审核人员用户名")
         private String username;
+    }
+
+    @Data
+    @ApiModel("流言id")
+    private static class Mid {
+        @ApiModelProperty("流言id")
+        private Integer mid;
     }
 }
