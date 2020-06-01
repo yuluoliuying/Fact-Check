@@ -26,7 +26,7 @@ public class MessageController {
     @ApiOperation("第一次审核流言")
     @PostMapping("/checkMessage")
     public String checkMessageValue(@RequestBody CheckInformation record) {
-        return messageService.checkMessageValue(record.mid, record.status, record.content,record.username);
+        return messageService.checkMessageValue(record.mid, record.status, record.username);
     }
 
     @ApiOperation("查询所有流言")
@@ -72,8 +72,6 @@ public class MessageController {
         private Integer mid;
         @ApiModelProperty("审核状态（通过为 1 不通过为 -1）")
         private Integer status;
-        @ApiModelProperty("审核意见")
-        private String content;
         @ApiModelProperty("审核人员用户名")
         private String username;
     }

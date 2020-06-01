@@ -1,5 +1,6 @@
 package com.factcheck.server.controller;
 
+import com.factcheck.server.model.Tag;
 import com.factcheck.server.model.User;
 import com.factcheck.server.model.UserTag;
 import com.factcheck.server.service.UserService;
@@ -52,6 +53,12 @@ public class UserController {
     @PostMapping("/addUserTag")
     public String addUserTag(@RequestBody UserTag record) {
         return userService.addUserTag(record.getUsername(), record.getTagName());
+    }
+
+    @ApiOperation("获取所有的标签")
+    @PostMapping("/getAllTags")
+    public List<Tag> getAllTags() {
+        return userService.getAllTags();
     }
 
     @Data

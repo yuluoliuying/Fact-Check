@@ -47,7 +47,7 @@ public class MessageService {
         return "操作成功";
     }
 
-    public String checkMessageValue(Integer mid, Integer status, String content, String username) {
+    public String checkMessageValue(Integer mid, Integer status,String username) {
         MessageState messageState = new MessageState();
         MessageProcess messageProcess = new MessageProcess();
         messageState.setMid(mid);
@@ -59,7 +59,6 @@ public class MessageService {
         messageProcess.setMid(mid);
         messageProcess.setType(1);
         messageProcess.setState(1);
-        messageProcess.setContent(content);
         messageProcess.setUsername(username);
         messageStateMapper.updateByPrimaryKey(messageState);
         messageProcessMapper.insert(messageProcess);

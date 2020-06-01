@@ -1,10 +1,9 @@
 package com.factcheck.server.service;
 
+import com.factcheck.server.mapper.TagMapper;
 import com.factcheck.server.mapper.UserMapper;
 import com.factcheck.server.mapper.UserTagMapper;
-import com.factcheck.server.model.User;
-import com.factcheck.server.model.UserExample;
-import com.factcheck.server.model.UserTag;
+import com.factcheck.server.model.*;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -16,6 +15,8 @@ public class UserService {
     private UserMapper userMapper;
     @Resource
     private UserTagMapper userTagMapper;
+    @Resource
+    private TagMapper tagMapper;
 
 
     public List<User> list() {
@@ -72,5 +73,10 @@ public class UserService {
         userTagMapper.insert(record);
         return "操作成功";
 
+    }
+
+    public List<Tag> getAllTags() {
+        TagExample tagExample = new TagExample();
+        return tagMapper.selectByExample(tagExample);
     }
 }
