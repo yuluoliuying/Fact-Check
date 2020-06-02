@@ -88,6 +88,12 @@ public class ResultController {
         return resultService.getAllDeniedResultWithAdvice();
     }
 
+    @ApiOperation("获取所有审核通过的文章")
+    @PostMapping("/getAllCheckedResult")
+    public List<Result> getAllCheckedResult() {
+        return resultService.getAllCheckedResult();
+    }
+
     @Data
     @ApiModel("文章id")
     private static class Rid {

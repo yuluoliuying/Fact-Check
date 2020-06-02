@@ -1,31 +1,26 @@
 package com.factcheck.server.model;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-
 import java.util.Date;
 
-@ApiModel("根据经过第一次审核的流言写的文章")
 public class Result {
-    @ApiModelProperty("文章id")
     private Integer rid;
-    @ApiModelProperty("相关流言的id")
+
     private Integer mid;
-    @ApiModelProperty("起草人员用户名")
+
     private String username;
-    @ApiModelProperty("文章名")
+
     private String resultName;
-    @ApiModelProperty("封面")
+
     private String cover;
-    @ApiModelProperty("相关地点")
+
     private String position;
-    @ApiModelProperty("标签")
+
     private String tagName;
-    @ApiModelProperty("更新时间")
+
     private Date updateTime;
-    @ApiModelProperty("发布时间")
+
     private Date releaseTime;
-    @ApiModelProperty("文章内容")
+
     private String description;
 
     public Integer getRid() {

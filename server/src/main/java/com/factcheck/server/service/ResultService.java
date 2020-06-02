@@ -28,6 +28,8 @@ public class ResultService {
     private ResultStateMapper resultStateMapper;
 
     public String insertResult(Result record) {
+        record.setUpdateTime(new Date());
+        record.setReleaseTime(null);
         resultMapper.insert(record);
         MessageState messageState = new MessageState();
         messageState.setMid(record.getMid());
@@ -49,28 +51,35 @@ public class ResultService {
 
 
     public List<Result> getRandomResult(Integer index) {
-        ResultExample resultExample = new ResultExample();
-        int sum = resultMapper.selectByExample(resultExample).size();
+        ResultStateExample resultStateExample = new ResultStateExample();
+        resultStateExample.createCriteria().andStateEqualTo(1);
+        List<Result> origins = getResultListWithState(resultStateExample);
+        int sum = origins.size();
         if (sum > index) {
             Random random = new Random();
-            Set<Integer> set = new HashSet<>();
+            Set<Result> set = new HashSet<>();
             while (set.size() != index) {
                 int num = random.nextInt(sum) + 1;
-                set.add(num);
+                set.add(origins.get(num - 1));
             }
-            resultExample.createCriteria().andRidIn(new ArrayList<>(set));
+            return new ArrayList<>(set);
+        } else {
+            return origins;
         }
-        return resultMapper.selectByExampleWithBLOBs(resultExample);
+
     }
 
     public List<Result> getRecentResult(Integer index) {
+        ResultStateExample resultStateExample = new ResultStateExample();
+        resultStateExample.createCriteria().andStateEqualTo(1);
+        List<Result> origins = getResultListWithState(resultStateExample);
         ResultExample resultExample = new ResultExample();
-        int sum = resultMapper.selectByExample(resultExample).size();
+        int sum = origins.size();
         if (sum <= index) {
-            return resultMapper.selectByExample(resultExample);
+            return origins;
         } else {
             resultExample.setOrderByClause("`release_time` ASC");
-            resultExample.createCriteria().andReleaseTimeLessThan(new Date());
+            resultExample.createCriteria().andReleaseTimeLessThan(new Date()).andReleaseTimeIsNotNull();
 
             List<Result> origin = resultMapper.selectByExampleWithBLOBs(resultExample);
             if (origin.size() == 0) {
@@ -102,11 +111,14 @@ public class ResultService {
     }
 
     public String updateResult(Result record) {
+        record.setUpdateTime(new Date());
         resultMapper.updateByPrimaryKeyWithBLOBs(record);
         return "操作成功";
     }
 
     public String reDraftResult(Result record) {
+        record.setReleaseTime(null);
+        record.setUpdateTime(new Date());
         resultMapper.updateByPrimaryKeyWithBLOBs(record);
         ResultState resultState = new ResultState();
         resultState.setState(0);
@@ -125,6 +137,12 @@ public class ResultService {
         MessageState messageState = new MessageState();
         MessageProcess messageProcess = new MessageProcess();
         ResultState resultState = new ResultState();
+        ResultExample resultExample = new ResultExample();
+        resultExample.createCriteria().andRidEqualTo(rid);
+        if (resultMapper.selectByExample(resultExample).size() == 0) {
+            return "此文章不存在";
+        }
+        Result result = resultMapper.selectByExampleWithBLOBs(resultExample).get(0);
         messageState.setMid(mid);
         messageProcess.setMid(mid);
         messageProcess.setType(3);
@@ -136,31 +154,24 @@ public class ResultService {
             messageState.setStatus(2);
             messageProcess.setState(0);
             resultState.setState(-1);
+            result.setReleaseTime(null);
         } else {
             messageState.setStatus(3);
             messageProcess.setState(1);
             resultState.setState(1);
+            result.setReleaseTime(new Date());
         }
         messageStateMapper.updateByPrimaryKey(messageState);
-        ResultStateExample example = new ResultStateExample();
-        example.createCriteria().andRidEqualTo(resultState.getRid());
-        resultStateMapper.updateByExampleWithBLOBs(resultState, example);
+        resultStateMapper.updateByPrimaryKeyWithBLOBs(resultState);
         messageProcessMapper.insert(messageProcess);
+        resultMapper.updateByPrimaryKeyWithBLOBs(result);
         return "操作成功";
     }
 
-    private List<Result> getResults(ResultStateExample resultStateExample) {
-        List<ResultState> resultStates = resultStateMapper.selectByExample(resultStateExample);
-        if (resultStates.size() == 0) {
-            return new ArrayList<>();
-        }
-        List<Integer> rids = new ArrayList<>();
-        for (ResultState state : resultStates) {
-            rids.add(state.getRid());
-        }
-        ResultExample resultExample = new ResultExample();
-        resultExample.createCriteria().andRidIn(rids);
-        return resultMapper.selectByExampleWithBLOBs(resultExample);
+    public List<Result> getAllCheckedResult() {
+        ResultStateExample resultStateExample = new ResultStateExample();
+        resultStateExample.createCriteria().andStateEqualTo(1);
+        return getResultListWithState(resultStateExample);
     }
 
     public List<ResultController.DeniedResultWithAdvice> getAllDeniedResultWithAdvice() {
@@ -179,6 +190,24 @@ public class ResultService {
             list.add(deniedResultWithAdvice);
         }
         return list;
+    }
+
+    private List<Result> getResultListWithState(ResultStateExample resultStateExample) {
+        List<ResultState> resultStates = resultStateMapper.selectByExample(resultStateExample);
+        if (resultStates.size() == 0) {
+            return new ArrayList<>();
+        }
+        List<Integer> rids = new ArrayList<>();
+        for (ResultState state : resultStates) {
+            rids.add(state.getRid());
+        }
+        ResultExample resultExample = new ResultExample();
+        resultExample.createCriteria().andRidIn(rids);
+        return resultMapper.selectByExampleWithBLOBs(resultExample);
+    }
+
+    private List<Result> getResults(ResultStateExample resultStateExample) {
+        return getResultListWithState(resultStateExample);
     }
 
 
