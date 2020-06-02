@@ -37,6 +37,7 @@ public class ResultService {
         resultState.setState(0);
         messageStateMapper.updateByPrimaryKey(messageState);
         messageProcessMapper.insert(messageProcess);
+        resultStateMapper.insert(resultState);
         return "操作成功";
     }
 
@@ -90,7 +91,7 @@ public class ResultService {
         }
         ResultExample resultExample = new ResultExample();
         resultExample.createCriteria().andRidIn(rids);
-        return resultMapper.selectByExample(resultExample);
+        return resultMapper.selectByExampleWithBLOBs(resultExample);
     }
 
     public Result selectResultById(Integer rid) {
@@ -125,7 +126,7 @@ public class ResultService {
         } else {
             messageState.setStatus(3);
             messageProcess.setState(1);
-            resultState.setState(0);
+            resultState.setState(1);
         }
         messageStateMapper.updateByPrimaryKey(messageState);
         resultStateMapper.updateByPrimaryKey(resultState);
