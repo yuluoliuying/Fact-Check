@@ -70,6 +70,18 @@ public class ResultController {
         return resultService.checkResult(record.rid, record.mid, record.status, record.content, record.username);
     }
 
+    @ApiOperation("查询所有被否决的文章")
+    @PostMapping("/getAllDeniedResult")
+    public List<Result> getAllDeniedResult() {
+        return resultService.getAllDeniedResult();
+    }
+
+    @ApiOperation("重新起草文章")
+    @PostMapping("/reDraftResult")
+    public String reDraftResult(@RequestBody Result record) {
+        return resultService.reDraftResult(record);
+    }
+
     @Data
     @ApiModel("文章id")
     private static class Rid {
