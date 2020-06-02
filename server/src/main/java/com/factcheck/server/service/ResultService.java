@@ -78,20 +78,17 @@ public class ResultService {
         }
     }
 
+    public List<Result> getAllDeniedResult() {
+        ResultStateExample resultStateExample = new ResultStateExample();
+        resultStateExample.createCriteria().andStateEqualTo(-1);
+        return getResults(resultStateExample);
+    }
+
+
     public List<Result> getAllUnCheckedResult() {
         ResultStateExample resultStateExample = new ResultStateExample();
         resultStateExample.createCriteria().andStateEqualTo(0);
-        List<ResultState> resultStates = resultStateMapper.selectByExample(resultStateExample);
-        if (resultStates.size() == 0) {
-            return new ArrayList<>();
-        }
-        List<Integer> rids = new ArrayList<>();
-        for (ResultState state : resultStates) {
-            rids.add(state.getRid());
-        }
-        ResultExample resultExample = new ResultExample();
-        resultExample.createCriteria().andRidIn(rids);
-        return resultMapper.selectByExampleWithBLOBs(resultExample);
+        return getResults(resultStateExample);
     }
 
     public Result selectResultById(Integer rid) {
@@ -99,7 +96,16 @@ public class ResultService {
     }
 
     public String updateResult(Result record) {
-        resultMapper.updateByPrimaryKey(record);
+        resultMapper.updateByPrimaryKeyWithBLOBs(record);
+        return "操作成功";
+    }
+
+    public String reDraftResult(Result record) {
+        resultMapper.updateByPrimaryKeyWithBLOBs(record);
+        ResultState resultState = new ResultState();
+        resultState.setState(0);
+        resultState.setRid(record.getRid());
+        resultStateMapper.updateByPrimaryKey(resultState);
         return "操作成功";
     }
 
@@ -122,7 +128,7 @@ public class ResultService {
         if (status == -1) {
             messageState.setStatus(2);
             messageProcess.setState(0);
-            resultState.setState(0);
+            resultState.setState(-1);
         } else {
             messageState.setStatus(3);
             messageProcess.setState(1);
@@ -132,6 +138,20 @@ public class ResultService {
         resultStateMapper.updateByPrimaryKey(resultState);
         messageProcessMapper.insert(messageProcess);
         return "操作成功";
+    }
+
+    private List<Result> getResults(ResultStateExample resultStateExample) {
+        List<ResultState> resultStates = resultStateMapper.selectByExample(resultStateExample);
+        if (resultStates.size() == 0) {
+            return new ArrayList<>();
+        }
+        List<Integer> rids = new ArrayList<>();
+        for (ResultState state : resultStates) {
+            rids.add(state.getRid());
+        }
+        ResultExample resultExample = new ResultExample();
+        resultExample.createCriteria().andRidIn(rids);
+        return resultMapper.selectByExampleWithBLOBs(resultExample);
     }
 
 
