@@ -25,10 +25,10 @@ public class UserController {
     @Resource
     private UserService userService;
 
-    @ApiOperation("测试")
-    @PostMapping("/test")
-    public List<User> test() {
-        return userService.list();
+    @ApiOperation("获取所有的用户")
+    @PostMapping("/getAllUsers")
+    public List<User> getAllUsers() {
+        return userService.getAllUsers();
     }
 
     @ApiOperation("注册")

@@ -66,7 +66,7 @@ public class ResultService {
             resultExample.createCriteria().andReleaseTimeLessThan(new Date());
 
             List<Result> origin = resultMapper.selectByExampleWithBLOBs(resultExample);
-            if(origin.size() == 0){
+            if (origin.size() == 0) {
                 return new ArrayList<>();
             }
             List<Result> results = new ArrayList<>();
@@ -75,6 +75,22 @@ public class ResultService {
             }
             return results;
         }
+    }
+
+    public List<Result> getAllUnCheckedResult() {
+        ResultStateExample resultStateExample = new ResultStateExample();
+        resultStateExample.createCriteria().andStateEqualTo(0);
+        List<ResultState> resultStates = resultStateMapper.selectByExample(resultStateExample);
+        if (resultStates.size() == 0) {
+            return new ArrayList<>();
+        }
+        List<Integer> rids = new ArrayList<>();
+        for (ResultState state : resultStates) {
+            rids.add(state.getRid());
+        }
+        ResultExample resultExample = new ResultExample();
+        resultExample.createCriteria().andRidIn(rids);
+        return resultMapper.selectByExample(resultExample);
     }
 
     public Result selectResultById(Integer rid) {
@@ -92,7 +108,7 @@ public class ResultService {
         return resultStateMapper.selectByExample(resultStateExample).size() != 0;
     }
 
-    public String checkResult(Integer rid,Integer mid, Integer status, String content, String username) {
+    public String checkResult(Integer rid, Integer mid, Integer status, String content, String username) {
         MessageState messageState = new MessageState();
         MessageProcess messageProcess = new MessageProcess();
         ResultState resultState = new ResultState();

@@ -46,6 +46,12 @@ public class ResultController {
         return resultService.getRecentResult(index.index);
     }
 
+    @ApiOperation("查询所有需要审核的文章")
+    @PostMapping("/getAllUncheckedResult")
+    public List<Result> getAllUncheckedResult() {
+        return resultService.getAllUnCheckedResult();
+    }
+
     @ApiOperation("更新一篇文章")
     @PostMapping("/updateResult")
     public String updateResult(@RequestBody Result record) {
@@ -61,7 +67,7 @@ public class ResultController {
     @ApiOperation("第二次审核文章（即根据通过第一次审核的流言起草的文章）")
     @PostMapping("/checkResult")
     public String checkResult(@RequestBody CheckInformation record) {
-        return resultService.checkResult(record.rid,record.mid, record.status, record.content, record.username);
+        return resultService.checkResult(record.rid, record.mid, record.status, record.content, record.username);
     }
 
     @Data
