@@ -16,15 +16,21 @@ public interface ResultStateMapper {
 
     int insertSelective(ResultState record);
 
+    List<ResultState> selectByExampleWithBLOBs(ResultStateExample example);
+
     List<ResultState> selectByExample(ResultStateExample example);
 
     ResultState selectByPrimaryKey(Integer rid);
 
     int updateByExampleSelective(@Param("record") ResultState record, @Param("example") ResultStateExample example);
 
+    int updateByExampleWithBLOBs(@Param("record") ResultState record, @Param("example") ResultStateExample example);
+
     int updateByExample(@Param("record") ResultState record, @Param("example") ResultStateExample example);
 
     int updateByPrimaryKeySelective(ResultState record);
+
+    int updateByPrimaryKeyWithBLOBs(ResultState record);
 
     int updateByPrimaryKey(ResultState record);
 }
