@@ -19,9 +19,8 @@ public class UserService {
     private TagMapper tagMapper;
 
 
-    public List<User> list() {
+    public List<User> getAllUsers() {
         UserExample example = new UserExample();
-        example.createCriteria().andUidEqualTo(1);
         return userMapper.selectByExample(example);
     }
 
