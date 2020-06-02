@@ -82,6 +82,12 @@ public class ResultController {
         return resultService.reDraftResult(record);
     }
 
+    @ApiOperation("获取所有被否决的文章以及对应的修改建议")
+    @PostMapping("/getAllDeniedResultWithAdvice")
+    public List<DeniedResultWithAdvice> getAllDeniedResultWithAdvice() {
+        return resultService.getAllDeniedResultWithAdvice();
+    }
+
     @Data
     @ApiModel("文章id")
     private static class Rid {
@@ -109,5 +115,16 @@ public class ResultController {
         private String content;
         @ApiModelProperty("审核人员用户名")
         private String username;
+    }
+
+    @Data
+    @ApiModel("不合格的文章和它的审核意见")
+    public static class DeniedResultWithAdvice {
+
+        @ApiModelProperty("文章")
+        private Result result;
+
+        @ApiModelProperty("审核意见")
+        private String advice;
     }
 }

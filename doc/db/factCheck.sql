@@ -110,6 +110,7 @@ create table `result`
 create table `result_state`(
     rid integer,
     state integer not null ,
+    content mediumtext null ,
     primary key (rid),
     foreign key (rid) references `result`(rid) on delete cascade
 )

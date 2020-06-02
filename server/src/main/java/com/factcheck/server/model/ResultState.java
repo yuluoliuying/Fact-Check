@@ -5,6 +5,8 @@ public class ResultState {
 
     private Integer state;
 
+    private String content;
+
     public Integer getRid() {
         return rid;
     }
@@ -21,6 +23,14 @@ public class ResultState {
         this.state = state;
     }
 
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -29,6 +39,7 @@ public class ResultState {
         sb.append("Hash = ").append(hashCode());
         sb.append(", rid=").append(rid);
         sb.append(", state=").append(state);
+        sb.append(", content=").append(content);
         sb.append("]");
         return sb.toString();
     }

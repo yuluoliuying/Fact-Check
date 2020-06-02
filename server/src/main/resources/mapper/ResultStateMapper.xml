@@ -5,6 +5,9 @@
     <id column="rid" jdbcType="INTEGER" property="rid" />
     <result column="state" jdbcType="INTEGER" property="state" />
   </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.factcheck.server.model.ResultState">
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+  </resultMap>
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -66,6 +69,25 @@
   <sql id="Base_Column_List">
     rid, `state`
   </sql>
+  <sql id="Blob_Column_List">
+    content
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.factcheck.server.model.ResultStateExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from result_state
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
   <select id="selectByExample" parameterType="com.factcheck.server.model.ResultStateExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
@@ -80,9 +102,11 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
     select 
     <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
     from result_state
     where rid = #{rid,jdbcType=INTEGER}
   </select>
@@ -97,8 +121,10 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.factcheck.server.model.ResultState">
-    insert into result_state (rid, `state`)
-    values (#{rid,jdbcType=INTEGER}, #{state,jdbcType=INTEGER})
+    insert into result_state (rid, `state`, content
+      )
+    values (#{rid,jdbcType=INTEGER}, #{state,jdbcType=INTEGER}, #{content,jdbcType=LONGVARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.factcheck.server.model.ResultState">
     insert into result_state
@@ -109,6 +135,9 @@
       <if test="state != null">
         `state`,
       </if>
+      <if test="content != null">
+        content,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="rid != null">
@@ -116,6 +145,9 @@
       </if>
       <if test="state != null">
         #{state,jdbcType=INTEGER},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
@@ -134,7 +166,19 @@
       <if test="record.state != null">
         `state` = #{record.state,jdbcType=INTEGER},
       </if>
+      <if test="record.content != null">
+        content = #{record.content,jdbcType=LONGVARCHAR},
+      </if>
     </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update result_state
+    set rid = #{record.rid,jdbcType=INTEGER},
+      `state` = #{record.state,jdbcType=INTEGER},
+      content = #{record.content,jdbcType=LONGVARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -153,7 +197,16 @@
       <if test="state != null">
         `state` = #{state,jdbcType=INTEGER},
       </if>
+      <if test="content != null">
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
     </set>
+    where rid = #{rid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.factcheck.server.model.ResultState">
+    update result_state
+    set `state` = #{state,jdbcType=INTEGER},
+      content = #{content,jdbcType=LONGVARCHAR}
     where rid = #{rid,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.factcheck.server.model.ResultState">

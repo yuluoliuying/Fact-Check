@@ -1,10 +1,15 @@
 package com.factcheck.server.service;
 
+import com.factcheck.server.controller.ResultController;
 import com.factcheck.server.mapper.MessageProcessMapper;
 import com.factcheck.server.mapper.MessageStateMapper;
 import com.factcheck.server.mapper.ResultMapper;
 import com.factcheck.server.mapper.ResultStateMapper;
 import com.factcheck.server.model.*;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import io.swagger.annotations.ApiOperation;
+import lombok.Data;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -35,6 +40,7 @@ public class ResultService {
         ResultState resultState = new ResultState();
         resultState.setRid(record.getRid());
         resultState.setState(0);
+        resultState.setContent("");
         messageStateMapper.updateByPrimaryKey(messageState);
         messageProcessMapper.insert(messageProcess);
         resultStateMapper.insert(resultState);
@@ -124,6 +130,7 @@ public class ResultService {
         messageProcess.setType(3);
         messageProcess.setUsername(username);
         messageProcess.setContent(content);
+        resultState.setContent(content);
         resultState.setRid(rid);
         if (status == -1) {
             messageState.setStatus(2);
@@ -135,7 +142,9 @@ public class ResultService {
             resultState.setState(1);
         }
         messageStateMapper.updateByPrimaryKey(messageState);
-        resultStateMapper.updateByPrimaryKey(resultState);
+        ResultStateExample example = new ResultStateExample();
+        example.createCriteria().andRidEqualTo(resultState.getRid());
+        resultStateMapper.updateByExampleWithBLOBs(resultState, example);
         messageProcessMapper.insert(messageProcess);
         return "操作成功";
     }
@@ -152,6 +161,24 @@ public class ResultService {
         ResultExample resultExample = new ResultExample();
         resultExample.createCriteria().andRidIn(rids);
         return resultMapper.selectByExampleWithBLOBs(resultExample);
+    }
+
+    public List<ResultController.DeniedResultWithAdvice> getAllDeniedResultWithAdvice() {
+        List<Result> results = getAllDeniedResult();
+        if (results.size() == 0) {
+            return new ArrayList<>();
+        }
+        List<ResultController.DeniedResultWithAdvice> list = new ArrayList<>();
+        for (Result result : results) {
+            ResultStateExample example = new ResultStateExample();
+            example.createCriteria().andRidEqualTo(result.getRid());
+            String advice = resultStateMapper.selectByExampleWithBLOBs(example).get(0).getContent();
+            ResultController.DeniedResultWithAdvice deniedResultWithAdvice = new ResultController.DeniedResultWithAdvice();
+            deniedResultWithAdvice.setAdvice(advice);
+            deniedResultWithAdvice.setResult(result);
+            list.add(deniedResultWithAdvice);
+        }
+        return list;
     }
 
 
