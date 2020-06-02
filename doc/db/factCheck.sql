@@ -101,7 +101,7 @@ create table `result`
     position     varchar(100) null,
     tag_name     varchar(100) not null,
     update_time  timestamp    not null,
-    release_time timestamp    not null,
+    release_time timestamp    null,
     primary key (rid),
     foreign key (mid) references `message` (mid) on delete cascade,
     foreign key (username) references `user` (username) on delete cascade
