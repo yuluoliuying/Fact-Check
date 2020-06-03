@@ -1,161 +1,156 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <title>factcheck后台管理系统</title>
-  <link rel="stylesheet" href="back/layui/css/layui.css">
-  <link rel="stylesheet" href="back/bootstrap/css/bootstrap.min.css">
-  <link rel="stylesheet" href="back/bootstrap/css/bootstrap-theme.min.css">
-  <link rel="stylesheet" href="back/DataTables/datatables.min.css">
-  <script src="back/jquery-validation-1.19.1/lib/jquery.js"></script>
-  <script src="back/DataTables/datatables.min.js"></script>
-  <script src="back/layer/layer.js"></script>
-  <script src="back/jquery-validation-1.19.1/dist/jquery.validate.min.js"></script>
-  <script src="back/jquery-validation-1.19.1/dist/additional-methods.min.js"></script>
-  <script src="back/jquery-validation-1.19.1/dist/localization/messages_zh.min.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>factcheck后台管理系统</title>
+    <link rel="stylesheet" href="back/layui/css/layui.css">
+    <link rel="stylesheet" href="back/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="back/bootstrap/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="back/DataTables/datatables.min.css">
+    <link rel="stylesheet" href="front/css/wangEditor.min.css">
+    <script src="back/jquery-validation-1.19.1/lib/jquery.js"></script>
+    <script src="back/DataTables/datatables.min.js"></script>
+    <script src="back/layer/layer.js"></script>
+    <script src="back/jquery-validation-1.19.1/dist/jquery.validate.min.js"></script>
+    <script src="back/jquery-validation-1.19.1/dist/additional-methods.min.js"></script>
+    <script src="back/jquery-validation-1.19.1/dist/localization/messages_zh.min.js"></script>
+    <script src="front/js/wangEditor.js" type="text/javascript"></script>
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
-  <div class="layui-header" style="background-color: rgb(205,87,18);">
-    <div class="layui-logo" style="color: #FFF; font-size: 20px; width: 160px;">factcheck</div>
-    <!-- 头部区域（可配合layui已有的水平导航） -->
-    <ul class="layui-nav layui-layout-right">
-        <li class="layui-nav-item">
-            <div id="datetime">
-              <script>
-              setInterval("document.getElementById('datetime').innerHTML=new Date().toLocaleString();", 10);
-              </script>
-            </div>
-        </li>
-        <li class="layui-nav-item">
-        
-      </li>
-    </ul>
-  </div>
-  
+    <div class="layui-header" style="background-color: rgb(205,87,18);">
+        <div class="layui-logo" style="color: #FFF; font-size: 20px; width: 160px;">factcheck</div>
+        <!-- 头部区域（可配合layui已有的水平导航） -->
+        <ul class="layui-nav layui-layout-right">
+            <li class="layui-nav-item">
+                <div id="datetime">
+                    <script>
+                        setInterval("document.getElementById('datetime').innerHTML=new Date().toLocaleString();", 10);
+                    </script>
+                </div>
+            </li>
+            <li class="layui-nav-item">
 
-  <aside class="box" id="test">
-    <button id="btn" style="background: url(back/images/收回按钮.png)"></button>
- </aside>
-
- <div class="layui-side layui-bg-black" id="laySide">
-    <div class="layui-side-scroll">
-      <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
-      <ul class="layui-nav layui-nav-tree"  lay-filter="test">
-        
-        <li class="layui-nav-item layui-nav-itemed">
-		  <a href="javascript:;">确认辟谣与起草流言</a>
-			<dl class="layui-nav-child">
-			<dd><a href="tobechecked.html">需辟谣流言</a></dd>
-			<dd><a href="tobedrafted.html">待起草流言</a></dd>
-			</dl>
-          <a href="javascript:;">辟谣管理</a>
-          <dl class="layui-nav-child">
-
-            <dd><a href="check.html">审核流言</a></dd>
-			<dd><a href="checkedf.html">审核失败流言</a></dd>
-            <dd><a href="checkeds.html">审核成功流言</a></dd>
-          </dl>
-		  <a href="javascript:;">平台管理</a>
-		  <dl class="layui-nav-child">
-			<dd><a href="distribute.html">账户管理</a></dd>
-			</dl>
-		  
-			
-			
-        </li>
-        
-      </ul>
+            </li>
+        </ul>
     </div>
-  </div>
-  <div class="layui-body" style="height: 660px;" id="layBody">
-    <!-- 内容主体区域 -->
-    <section>
-        <div class="layui-tab layui-tab-brief" lay-filter="demo" lay-allowclose="true">
-          <div class="layui-tab-content" style="height: 100px;">
-            <div class="layui-tab-item layui-show">
-              <table class="table display" id="datatable">
-                <thead>
-                <tr>
-                    <th>流言ID</th>
-                    <th>审核时间</th>
-                    <th>操作</th>
-                </tr>
-                </thead>
-              </table>
-            </div>
-          </div>
+
+
+    <aside class="box" id="test">
+        <button id="btn" style="background: url(back/images/收回按钮.png)"></button>
+    </aside>
+
+    <div class="layui-side layui-bg-black" id="laySide">
+        <div class="layui-side-scroll">
+            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+            <ul class="layui-nav layui-nav-tree" lay-filter="test">
+
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a href="javascript:;">确认辟谣与起草流言</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="tobechecked.html">需辟谣流言</a></dd>
+                        <dd><a href="tobedrafted.html">待起草流言</a></dd>
+                    </dl>
+                    <a href="javascript:;">辟谣管理</a>
+                    <dl class="layui-nav-child">
+
+                        <dd><a href="check.html">审核流言</a></dd>
+                        <dd><a href="checkedf.html">审核失败流言</a></dd>
+                        <dd><a href="checkeds.html">审核成功流言</a></dd>
+                    </dl>
+                    <a href="javascript:;">平台管理</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="distribute.html">账户管理</a></dd>
+                    </dl>
+
+
+                </li>
+
+            </ul>
         </div>
-    </section>
-  </div>
+    </div>
+    <div class="layui-body" style="height: 660px;" id="layBody">
+        <!-- 内容主体区域 -->
+        <section>
+            <div class="layui-tab layui-tab-brief" lay-filter="demo" lay-allowclose="true">
+                <div class="layui-tab-content" style="height: 100px;">
+                    <div class="layui-tab-item layui-show">
+                        <table class="table display" id="datatable">
+                            <thead>
+                            <tr>
+                                <th>辟谣ID</th>
+                                <th>审核时间</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
 </div>
 
- <!-- 审核子页面 -->
+<!-- 审核子页面 -->
 
 <script type="text/template" id="html2">
-  <form class = "layui-form" action="">
-    <div class="layui-form">
-      <fieldSet>
-        <div class="layui-form-item">
+    <form class="layui-form" action="">
+        <div class="layui-form">
+            <fieldSet>
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">辟谣编号</label>
+                        <div class="layui-input-inline">
+                            <input type="text" id="id" autocomplete="off" placeholder="请输入标题" class="layui-input"
+                                   readonly>
+                        </div>
+                    </div>
 
-          <div class="layui-inline">
-            <label class="layui-form-label">流言编号</label>
-            <div class="layui-input-inline">
-              <input type="text" id="id" autocomplete="off" placeholder="请输入标题" class="layui-input" readonly>
-            </div>
-          </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">辟谣名称</label>
+                        <div class="layui-input-inline">
+                            <input type="text" id="name" autocomplete="off" placeholder="请输入标题" class="layui-input"
+                                   readonly>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">辟谣标签</label>
+                        <div class="layui-input-inline">
+                            <input type="text" id="label" autocomplete="off" placeholder="请输入标题" class="layui-input"
+                                   readonly>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">流言地点</label>
+                        <div class="layui-input-inline">
+                            <input type="text" id="place" autocomplete="off" placeholder="请输入标题" class="layui-input"
+                                   readonly>
+                        </div>
+                    </div>
 
-          <div class="layui-inline">
-            <label class="layui-form-label">流言名称</label>
-            <div class="layui-input-inline">
-              <input type="text" id="name" autocomplete="off" placeholder="请输入标题" class="layui-input" readonly>
-            </div>
-          </div>
-			<div class="layui-inline">
-            <label class="layui-form-label">流言标签</label>
-            <div class="layui-input-inline">
-              <input type="text" id="label" autocomplete="off" placeholder="请输入标题" class="layui-input" readonly>
-            </div>
-          </div>
-			<div class="layui-inline">
-            <label class="layui-form-label">流言地点</label>
-            <div class="layui-input-inline">
-              <input type="text" id="place" autocomplete="off" placeholder="请输入标题" class="layui-input" readonly>
-            </div>
-          </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">辟谣内容</label>
+                        <div class="layui-input-inline">
+                            <div id="content"></div>
+                        </div>
+
+                    </div>
 
 
-          <div class="layui-form-item layui-form-text">
-            <label class="layui-form-label">流言内容</label>
-            <div class="layui-input-block">
-              <textarea placeholder="请输入内容" class="layui-textarea"></textarea>
-            </div>
-          </div>
-		   <div class="layui-form-item layui-form-text">
-            <label class="layui-form-label">审批内容</label>
-            <div class="layui-input-block">
-              <textarea placeholder="请输入内容" class="layui-textarea"></textarea>
-            </div>
-          </div>
-			
-          <div class="layui-inline">
-              <label class="layui-form-label">附件查看</label>
-              <div class="layui-input-inline">
-                  <input type="text" id="attach" autocomplete="off" placeholder="请输入标题" class="layui-input" readonly>
-              </div>
-              <div class="layui-inline">
-                  <button type="button" class="layui-btn">下载</button>
-              </div>
-          </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">封面查看</label>
+                        <img id="cover" src="back/images/文件.png" alt="封面"/>
+                    </div>
 
-          <div class="layui-form-item layui-form-text">
-              
-          </div>
+                    <div class="layui-form-item layui-form-text">
 
-          
-      </fieldSet>
-    </div>
-  </form>
+                    </div>
+
+
+                </div>
+            </fieldSet>
+        </div>
+    </form>
 </script>
 
 
@@ -163,104 +158,123 @@
 <script src="back//utils.js"></script>
 <script>
 
-//JavaScript代码区域
-layui.use(['element', 'laydate','form'], function(){
-  var element = layui.element,
-  form = layui.form;
-  form.render();
-});
-  var box = document.getElementById("test")
-  var btn = document.getElementById("btn")
-  var layBody = document.getElementById("layBody")
-  var laySide = document.getElementById("laySide")
+    //JavaScript代码区域
+    layui.use(['element', 'laydate', 'form'], function () {
+        let element = layui.element,
+            form = layui.form;
+        form.render();
+    });
+    let box = document.getElementById("test")
+    let btn = document.getElementById("btn")
+    let layBody = document.getElementById("layBody")
+    let laySide = document.getElementById("laySide")
 
-  btn.onclick = function() {
-      if (box.offsetLeft == 0) {
-          box.style['margin-left'] = -200 + "px"
-          layBody.style['margin-left'] = -200 + "px"
-          laySide.style['margin-left'] = -200 + "px"
-          $("#btn").css('background', 'url(images/放出按钮.png)')
-      } else {
-          box.style['margin-left'] = 0 + "px"
-          layBody.style['margin-left'] = 0 + "px"
-          laySide.style['margin-left'] = 0 + "px"
-          $("#btn").css('background', 'url(images/收回按钮.png)')
-      }
-  }
-
-  var dataSet = [
-    [ "001","2011/04/25"],
-    [ "002","2011/04/25"],
-  ];
-
-  var table = $('#datatable').DataTable({
-    "searching": false,//是否展示搜索器
-    "scrollY": 325,
-    "ordering": false,
-    "lengthMenu": [10,20,30,50],
-    "dom": '<"top">rt<"bottom"lip><"clear">',
-    "data": dataSet,
-    "language": {
-       "infoEmpty": "共0条，",
-       "infoFiltered": " - 共_MAX_条，",
-       "info":'共 _TOTAL_ 条，',
-       "lengthMenu": "显示 _MENU_ 条记录",
-       "paginate": {
-         "previous": "<",
-         "next": ">"
+    btn.onclick = function () {
+        if (box.offsetLeft === 0) {
+            box.style['margin-left'] = -200 + "px"
+            layBody.style['margin-left'] = -200 + "px"
+            laySide.style['margin-left'] = -200 + "px"
+            $("#btn").css('background', 'url(images/放出按钮.png)')
+        } else {
+            box.style['margin-left'] = 0 + "px"
+            layBody.style['margin-left'] = 0 + "px"
+            laySide.style['margin-left'] = 0 + "px"
+            $("#btn").css('background', 'url(images/收回按钮.png)')
         }
-      },
-       columnDefs: [
-            {
-                targets: [0,2],
-                "visible": true,
-                 className: "text-align-c"
-            },{
-                targets: 1,
-                 className: "text-align-c",
-                render: function (data) {
-                    if (null == data) {
-                        return null;
+    }
+
+    let dataSet;
+
+    let html2 = document.getElementById('html2').innerHTML
+
+    $(function () {
+        $.ajax({
+            url: '/result/getAllCheckedResult',
+            type: 'POST',
+            dataType: 'JSON',
+            success: function (result) {
+                dataSet = result;
+                loadTable();
+            }
+        })
+    });
+
+    function loadTable() {
+        let table = $('#datatable').DataTable({
+            "searching": false,//是否展示搜索器
+            "scrollY": 325,
+            "ordering": false,
+            "lengthMenu": [10, 20, 30, 50],
+            "dom": '<"top">rt<"bottom"lip><"clear">',
+            "data": dataSet,
+            "language": {
+                "infoEmpty": "共0条，",
+                "infoFiltered": " - 共_MAX_条，",
+                "info": '共 _TOTAL_ 条，',
+                "lengthMenu": "显示 _MENU_ 条记录",
+                "paginate": {
+                    "previous": "<",
+                    "next": ">"
+                }
+            },
+            columnDefs: [
+                {
+                    targets: 0,
+                    render: function (data, type, row, meta) {
+                        return `<div><p>${row.rid}</p></div>`
                     }
-                    return dateFormat(new Date(data), "yyyy-MM-dd");
+                }, {
+                    targets: 1,
+                    className: "text-align-c",
+                    render: function (data, type, row, meta) {
+                        return dateFormat(new Date(row.updateTime), "yyyy-MM-dd");
+                    }
+                }, {
+                    targets: -1,
+                    width: 130,
+                    render: function (data, type, row, meta) {
+                        return `<div><button class="btn mr-5 btn-primary detail" value="${row.rid}">详情</button></div>`;
+                    }
+                }]
+        });
+        $(".detail").each(function () {
+            $(this).click(() => {
+                layer.open({
+                    type: 1,
+                    title: "审批成功",
+                    content: html2,
+                    area: ['600px', '520px']
+                });
+
+                let form = layui.form;
+                form.render()
+
+                let rid = $(this).val();
+                let result;
+                for (let i = 0; i < dataSet.length; i++) {
+                    if (rid == dataSet[i].rid) {
+                        result = dataSet[i];
+                        break;
+                    }
                 }
-            }, {
-                targets: -1,
-                width: 130,
-                render: function (data, type, row, meta) {
-                    var btn = "";
+                $(`#id`).val(result.rid);
+                $(`#name`).val(result.resultName);
+                $(`#place`).val(result.position);
+                $(`#label`).val(result.tagName);
 
-                        btn += "<button id=\"" + row + "\" class=\"btn mr-5 btn-primary update_btn\">详情</button>";
-                    
-                    return '<div>' + btn + '</div>';
-                }
-            }]
-    })
-  
+                let E = window.wangEditor;
+                editor = new E(`#content`);
+                editor.customConfig.menus = [];
+                editor.create();
+                editor.$textElem.attr('contenteditable', false);
+                editor.txt.html(result.description);
 
-  var html2 = document.getElementById('html2').innerHTML
+                $(`#cover`).attr('src', `/attachment/${result.cover}`);
+            })
+        })
+    }
 
-    $(".update_btn").click(function () {
-      layer.open({
-        type: 1,
-        title: "审批成功",
-        content: html2,
-        area:['600px','520px']
-      });
 
-      var form = layui.form;
-          form.render();
-
-      layui.use(['transfer', 'layer', 'util'], function(){
-      var $ = layui.$
-      ,transfer = layui.transfer
-      ,layer = layui.layer
-      ,util = layui.util; })     
-    })
-
-    
-
-  
 </script>
 <link rel="stylesheet" type="text/css" href="back/首页.css">
 
