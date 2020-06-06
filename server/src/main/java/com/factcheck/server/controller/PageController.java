@@ -2,6 +2,7 @@ package com.factcheck.server.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 public class PageController {
@@ -24,6 +25,9 @@ public class PageController {
     public String news2() {
         return "front/news";
     }
+
+    @GetMapping("news/{rid}")
+    public String news3(@PathVariable Integer rid) {return "front/news";}
 
     @GetMapping("submit")
     public String submit() {

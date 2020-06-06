@@ -355,7 +355,7 @@
 
 
     function check() {
-        let status = $(`input[name="result"][checked]`).val();
+        let status = $("input[name='result']:checked").val();
         $.ajax({
             url: '/result/checkResult',
             type: 'POST',

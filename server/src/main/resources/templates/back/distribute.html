@@ -1,283 +1,234 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <title>factcheck后台管理系统</title>
-  <link rel="stylesheet" href="back/layui/css/layui.css">
-  <link rel="stylesheet" href="back/bootstrap/css/bootstrap.min.css">
-  <link rel="stylesheet" href="back/bootstrap/css/bootstrap-theme.min.css">
-  <link rel="stylesheet" href="back/DataTables/datatables.min.css">
-  <script src="back/jquery-validation-1.19.1/lib/jquery.js"></script>
-  <script src="back/DataTables/datatables.min.js"></script>
-  <script src="back/layer/layer.js"></script>
-  <script src="back/jquery-validation-1.19.1/dist/jquery.validate.min.js"></script>
-  <script src="back/jquery-validation-1.19.1/dist/additional-methods.min.js"></script>
-  <script src="back/jquery-validation-1.19.1/dist/localization/messages_zh.min.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>factcheck后台管理系统</title>
+    <link rel="stylesheet" href="back/layui/css/layui.css">
+    <link rel="stylesheet" href="back/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="back/bootstrap/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="back/DataTables/datatables.min.css">
+    <script src="back/jquery-validation-1.19.1/lib/jquery.js"></script>
+    <script src="back/DataTables/datatables.min.js"></script>
+    <script src="back/layer/layer.js"></script>
+    <script src="back/jquery-validation-1.19.1/dist/jquery.validate.min.js"></script>
+    <script src="back/jquery-validation-1.19.1/dist/additional-methods.min.js"></script>
+    <script src="back/jquery-validation-1.19.1/dist/localization/messages_zh.min.js"></script>
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
-  <div class="layui-header" style="background-color: rgb(205,87,18);">
-    <div class="layui-logo" style="color: #FFF; font-size: 20px; width: 160px;">Factcheck</div>
-    <!-- 头部区域（可配合layui已有的水平导航） -->
-    <ul class="layui-nav layui-layout-right">
-        <li class="layui-nav-item">
-            <div id="datetime">
-              <script>
-              setInterval("document.getElementById('datetime').innerHTML=new Date().toLocaleString();", 10);
-              </script>
-            </div>
-        </li>
-        <li class="layui-nav-item">
-        
-      </li>
-    </ul>
-  </div>
-  
+    <div class="layui-header" style="background-color: rgb(205,87,18);">
+        <div class="layui-logo" style="color: #FFF; font-size: 20px; width: 160px;">Factcheck</div>
+        <!-- 头部区域（可配合layui已有的水平导航） -->
+        <ul class="layui-nav layui-layout-right">
+            <li class="layui-nav-item">
+                <div id="datetime">
+                    <script>
+                        setInterval("document.getElementById('datetime').innerHTML=new Date().toLocaleString();", 10);
+                    </script>
+                </div>
+            </li>
+            <li class="layui-nav-item">
 
-  <aside class="box" id="test">
-    <button id="btn" style="background: url(back/images/收回按钮.png)"></button>
- </aside>
-
- <div class="layui-side layui-bg-black" id="laySide">
-    <div class="layui-side-scroll">
-      <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
-      <ul class="layui-nav layui-nav-tree"  lay-filter="test">
-        
-        <li class="layui-nav-item layui-nav-itemed">
-		  <a href="javascript:;">确认辟谣与起草流言</a>
-			<dl class="layui-nav-child">
-			<dd><a href="tobechecked.html">需辟谣流言</a></dd>
-			<dd><a href="tobedrafted.html">待起草流言</a></dd>
-			</dl>
-          <a href="javascript:;">辟谣管理</a>
-          <dl class="layui-nav-child">
-
-            <dd><a href="check.html">审核流言</a></dd>
-			<dd><a href="checkedf.html">审核失败流言</a></dd>
-            <dd><a href="checkeds.html">审核成功流言</a></dd>
-          </dl>
-		  <a href="javascript:;">平台管理</a>
-		  <dl class="layui-nav-child">
-			<dd><a href="distribute.html">账户管理</a></dd>
-			</dl>
-		  
-			
-			
-        </li>
-        
-      </ul>
+            </li>
+        </ul>
     </div>
-  </div>
-  <div class="layui-body" style="height: 660px;" id="layBody">
-    <!-- 内容主体区域 -->
-    <section>
-        <div class="layui-tab layui-tab-brief" lay-filter="demo" lay-allowclose="true">
-          <div class="layui-tab-content" style="height: 100px;">
-            <div class="layui-tab-item layui-show">
-              <div class="layui-form-item">
-                <button type="submit" class="layui-btn layui-btn-sm layui-btn-normal" id="new_account">新增账号</button>
-              </div>
-              <table class="table display" id="datatable">
-                  <thead>
-                  <tr>
-                      <th>用户ID</th>
-                      <th>用户</th>
-                      <th>负责标签</th>
-                      <th>操作</th>
-                  </tr>
-                  </thead>
-                </table>
-            </div>
-          </div>
+
+
+    <aside class="box" id="test">
+        <button id="btn" style="background: url(back/images/收回按钮.png)"></button>
+    </aside>
+
+    <div class="layui-side layui-bg-black" id="laySide">
+        <div class="layui-side-scroll">
+            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+            <ul class="layui-nav layui-nav-tree" lay-filter="test">
+
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a href="javascript:;">确认辟谣与起草流言</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="tobechecked.html">需辟谣流言</a></dd>
+                        <dd><a href="tobedrafted.html">待起草流言</a></dd>
+                    </dl>
+                    <a href="javascript:;">辟谣管理</a>
+                    <dl class="layui-nav-child">
+
+                        <dd><a href="check.html">审核流言</a></dd>
+                        <dd><a href="checkedf.html">审核失败流言</a></dd>
+                        <dd><a href="checkeds.html">审核成功流言</a></dd>
+                    </dl>
+                    <a href="javascript:;">平台管理</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="distribute.html">账户管理</a></dd>
+                    </dl>
+
+
+                </li>
+
+            </ul>
         </div>
-    </section>
-  </div>
+    </div>
+    <div class="layui-body" style="height: 660px;" id="layBody">
+        <!-- 内容主体区域 -->
+        <section>
+            <div class="layui-tab layui-tab-brief" lay-filter="demo" lay-allowclose="true">
+                <div class="layui-tab-content" style="height: 100px;">
+                    <div class="layui-tab-item layui-show">
+                        <div class="layui-form-item">
+                            <button type="submit" class="layui-btn layui-btn-sm layui-btn-normal" id="new_account">
+                                新增账号
+                            </button>
+                        </div>
+                        <table class="table display" id="datatable">
+                            <thead>
+                            <tr>
+                                <th>用户ID</th>
+                                <th>用户</th>
+                                <th>角色</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
 </div>
- <!-- 子页面 -->
 
-<script type="text/template" id="html2">
-  <form class = "layui-form" action="">
-    <div class="layui-form">
-      <fieldSet>
-        <div class="layui-form-item">
+<!-- 权限分配子页面 -->
+<script type="text/template" id="html1">
+    <br>
+    <form class="layui-form" action="">
 
-          <div class="layui-inline">
-            <label class="layui-form-label">账户ID</label>
-            <div class="layui-input-inline">
-              <input type="text" id="id" autocomplete="off" placeholder="请输入标题" class="layui-input" readonly>
+
+        <div class="layui-form">
+            <div class="layui-form-item">
+                <label class="layui-form-label">权限</label>
+                <div class="layui-input-block all">
+                    <input type="checkbox" name="label1" title="标签1">
+                    <input type="checkbox" name="label2" title="标签2">
+                    <input type="checkbox" name="label3" title="标签3">
+                    <input type="checkbox" name="label4" title="标签4">
+                </div>
             </div>
-          </div>
-
-          <div class="layui-inline">
-            <label class="layui-form-label">账户名称</label>
-            <div class="layui-input-inline">
-              <input type="text" id="name" autocomplete="off" placeholder="请输入标题" class="layui-input" readonly>
-            </div>
-          </div>
-			<div class="layui-inline">
-            <label class="layui-form-label">账户密码</label>
-            <div class="layui-input-inline">
-              <input type="text" id="label" autocomplete="off" placeholder="请输入标题" class="layui-input" readonly>
-            </div>
-          </div>
-			
-		<div class="layui-form-item">
-          <label class="layui-form-label"></label>
-          <div class="layui-input-block" id="input1">
-              <button id="config" type="button" class="layui-btn layui-btn-normal">确认</button>
-              <button type="button" class="layui-btn" >返回</button>
-          </div>
-		</div>
-
-         
-
-          
-
-          
-
-          
-      </fieldSet>
-    </div>
-  </form>
-</script>
-
- <!-- 权限分配子页面 -->
- <script type="text/template" id="html1">
-  <br>
-  <form class = "layui-form" action="">
-
-
-  <div class="layui-form">
-    <div class="layui-form-item" >
-        <label class="layui-form-label">权限</label>
-        <div class="layui-input-block all">
-          <input type="checkbox" name="label1" title="标签1">
-          <input type="checkbox" name="label2" title="标签2">
-          <input type="checkbox" name="label3" title="标签3">
-          <input type="checkbox" name="label4" title="标签4">
         </div>
-      </div>
-    </div>
 
 
-  <div class="layui-form-item">
-          <label class="layui-form-label"></label>
-          <div class="layui-input-block" id="input1">
-              <button id="config" type="button" class="layui-btn layui-btn-normal">确认</button>
-              <button type="button" class="layui-btn" >返回</button>
-          </div>
-  </div>
-</form>
+        <div class="layui-form-item">
+            <label class="layui-form-label"></label>
+            <div class="layui-input-block" id="input1">
+                <button id="config" type="button" class="layui-btn layui-btn-normal">确认</button>
+                <button type="button" class="layui-btn">返回</button>
+            </div>
+        </div>
+    </form>
 </script>
 
 <script src="back/layui/layui.js"></script>
-<script src="back//utils.js"></script>
+<script src="back/utils.js"></script>
 <script>
-//JavaScript代码区域
-layui.use(['form','element', 'laydate'], function(){
-  var element = layui.element;
-  var form = layui.form;
-  form.render();
-});
-  var box = document.getElementById("test")
-  var btn = document.getElementById("btn")
-  var layBody = document.getElementById("layBody")
-  var laySide = document.getElementById("laySide")
-
-  btn.onclick = function() {
-      if (box.offsetLeft == 0) {
-          box.style['margin-left'] = -200 + "px"
-          layBody.style['margin-left'] = -200 + "px"
-          laySide.style['margin-left'] = -200 + "px"
-          $("#btn").css('background', 'url(images/放出按钮.png)')
-      } else {
-          box.style['margin-left'] = 0 + "px"
-          layBody.style['margin-left'] = 0 + "px"
-          laySide.style['margin-left'] = 0 + "px"
-          $("#btn").css('background', 'url(images/收回按钮.png)')
-      }
-  }
-
-  
-  var dataSet = [
-    [ "001","小明","A"],
-    [ "002","小红","B"],
-    [ "003","小强","C"]
-   
-  ];
-  var table = $('#datatable').DataTable({
-    "searching": false,//是否展示搜索器
-    "scrollY": 325,
-    "ordering": false,
-    "lengthMenu": [10,20,30,50],
-    "dom": '<"top">rt<"bottom"lip><"clear">',
-    "data": dataSet,
-    "language": {
-       "infoEmpty": "共0条，",
-       "infoFiltered": " - 共_MAX_条，",
-       "info":'共 _TOTAL_ 条，',
-       "lengthMenu": "显示 _MENU_ 条记录",
-       "paginate": {
-         "previous": "<",
-         "next": ">"
-        }
-      },
-       columnDefs: [
-            {
-                targets: [0,1,2,3],
-                "visible": true,
-                 className: "text-align-c"
-            }, {
-                targets: -1,
-                width: 130,
-                render: function (data, type, row, meta) {
-                    var btn = "";
-                        btn += "<button id=\""+row+"\" class=\"btn mr-5 btn-primary update_btn\">分配标签</button>";
-
-                        
-
-                        //btn += "<button id=\"del_estimake_btn\" class=\"btn btn-secondary\">删除概算</button>";
-                    return '<div>' + btn + '</div>';
-                }
-            }]
-    })
-
-    var html1 = document.getElementById('html1').innerHTML
-    $(".update_btn").click(function(){
-      layer.open({
-          type: 1,
-          title:"权限修改",
-          area: ['650px', '300px'], //宽高
-          content: html1,
-        });
-
-        var form = layui.form;
+    //JavaScript代码区域
+    layui.use(['form', 'element', 'laydate'], function () {
+        let element = layui.element;
+        let form = layui.form;
         form.render();
+    });
+    let box = document.getElementById("test")
+    let btn = document.getElementById("btn")
+    let layBody = document.getElementById("layBody")
+    let laySide = document.getElementById("laySide")
 
-        $("#config").click(function(){
-          alert("ok");
+    btn.onclick = function () {
+        if (box.offsetLeft === 0) {
+            box.style['margin-left'] = -200 + "px"
+            layBody.style['margin-left'] = -200 + "px"
+            laySide.style['margin-left'] = -200 + "px"
+            $("#btn").css('background', 'url(images/放出按钮.png)')
+        } else {
+            box.style['margin-left'] = 0 + "px"
+            layBody.style['margin-left'] = 0 + "px"
+            laySide.style['margin-left'] = 0 + "px"
+            $("#btn").css('background', 'url(images/收回按钮.png)')
+        }
+    }
+
+
+    let dataSet;
+
+
+    let html1 = document.getElementById('html1').innerHTML
+
+
+    $(function () {
+        $.ajax({
+            url: '/user/getAllUsers',
+            type: 'POST',
+            dataType: 'json',
+            success: function (result) {
+                dataSet = result;
+                loadTable();
+            }
         })
-    })
-	var html2 = document.getElementById('html2').innerHTML
+    });
 
-    $(new_account).click(function () {
-	
-      layer.open({
-        type: 1,
-        title: "新增账号",
-        content: html2,
-        area:['400px','260px']
-      });
+    function loadTable() {
+        let table = $('#datatable').DataTable({
+            "searching": false,//是否展示搜索器
+            "scrollY": 325,
+            "ordering": false,
+            "lengthMenu": [10, 20, 30, 50],
+            "dom": '<"top">rt<"bottom"lip><"clear">',
+            "data": dataSet,
+            "language": {
+                "infoEmpty": "共0条，",
+                "infoFiltered": " - 共_MAX_条，",
+                "info": '共 _TOTAL_ 条，',
+                "lengthMenu": "显示 _MENU_ 条记录",
+                "paginate": {
+                    "previous": "<",
+                    "next": ">"
+                }
+            },
+            columnDefs: [
+                {
+                    targets: 0,
+                    render: function (data, type, row, meta) {
+                        return `<div>${row.uid}</div>`
+                    }
+                },{
+                    targets: 1,
+                    render: function (data, type, row, meta) {
+                        return `<div>${row.username}</div>`
+                    }
+                }, {
+                    targets: 2,
+                    render: function (data, type, row, meta) {
+                        return `<div>${row.roleName}</div>`
+                    }
+                },  {
+                    targets: -1,
+                    width: 130,
+                    render: function (data, type, row, meta) {
+                        return `<div><button class="btn mr-5 btn-primary distribute" value="${row.uid}">分配标签</button></div>`;
+                    }
+                }]
+        });
+        $(".distribute").click(function () {
+            layer.open({
+                type: 1,
+                title: "权限修改",
+                area: ['650px', '300px'], //宽高
+                content: html1,
+            });
 
-      var form = layui.form;
-          form.render();
+            let form = layui.form;
+            form.render();
 
-      layui.use(['transfer', 'layer', 'util'], function(){
-      var $ = layui.$
-      ,transfer = layui.transfer
-      ,layer = layui.layer
-      ,util = layui.util; })     
-    })
+            $("#config").click(function () {
+                alert("ok");
+            })
+        })
+    }
 </script>
 <link rel="stylesheet" type="text/css" href="back/首页.css">
 

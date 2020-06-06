@@ -262,7 +262,7 @@
                     targets: 3,
                     width: 130,
                     render: function (data, type, row, meta) {
-                        return `<div><button class="btn mr-5 btn-primary detail" value="${row.description}">查看详情</button></div>`
+                        return `<div><button class="btn mr-5 btn-primary detail" value="${row.mid}">查看详情</button></div>`
                     }
                 }, {
                     targets: 4,
@@ -280,12 +280,19 @@
                     area: ['500px', '200px'],
                     content: html2
                 });
+                let message;
+                for (let i = 0; i < dataSet.length; i++) {
+                    let item = dataSet[i];
+                    if (item.mid == ($(this).val())) {
+                        message = item;
+                        break;
+                    }
+                }
                 let E = window.wangEditor;
                 editor = new E(`#editor2`);
                 editor.customConfig.menus = [];
                 editor.create();
                 editor.$textElem.attr('contenteditable', false);
-                editor.txt.html($(this).val());
             });
         });
         $(`.draft`).each(function () {
